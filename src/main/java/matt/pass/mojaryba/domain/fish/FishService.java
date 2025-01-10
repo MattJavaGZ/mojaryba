@@ -197,7 +197,9 @@ public class FishService {
     public boolean verificationFishAuthorOrAdmin(long fishId) {
         final String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         final Fish fish = fishRepository.findById(fishId).orElseThrow();
-        boolean isAuthor = fish.getUser().getEmail().equals(userEmail);
+
+        boolean isAuthor = fish.getUser() != null && fish.getUser().getEmail().equals(userEmail);
+
         boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
         return isAdmin || isAuthor;

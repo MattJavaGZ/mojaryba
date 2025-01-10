@@ -13,8 +13,10 @@
     <include file="0006_create_table_like.xml" relativeToChangelogFile="true"/>
     <include file="0007_create_table_comment.xml" relativeToChangelogFile="true"/>
 
+    <include file="../testdata/0005_fish_type.xml" relativeToChangelogFile="true"/>
+
     <include file="../testdata/0004_users_and_roles.sql" relativeToChangelogFile="true" context="dev"/>
-    <include file="../testdata/0001_fish_type.sql" relativeToChangelogFile="true" context="dev"/>
+<!--    <include file="../testdata/0001_fish_type.sql" relativeToChangelogFile="true" context="dev"/>-->
     <include file="../testdata/0002_fish.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/0003_fish_photos.sql" relativeToChangelogFile="true" context="dev"/>
 
