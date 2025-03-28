@@ -33,11 +33,11 @@ public class FavoriteService {
     }
 
     public String addToFavorite(String favoriteCookie, Long fishId) {
-        return favoriteCookie + fishId + ";";
+        return favoriteCookie + " " + fishId + ";";
     }
 
     public String deleteWithFavorite(String favoriteCookie, Long fishId) {
-        return favoriteCookie.replaceAll(fishId + ";", "");
+        return favoriteCookie.replaceAll(" " + fishId + ";", "");
     }
 
 
