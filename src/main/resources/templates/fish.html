@@ -51,7 +51,8 @@
         </div>
         <div class="fish-favorite">
 
-            <a href="#" th:href="@{|/admin/usun/${fish.id}|}" sec:authorize="hasRole('ADMIN')" class="admin-delete">
+            <a href="#" th:href="@{|/admin/usun/${fish.id}|}" sec:authorize="hasRole('ADMIN')"
+               onclick="return confirm('Czy na pewno chcesz usunąć ?')" class="admin-delete">
                 Usuń okaz
             </a>
             <a th:if="${edit}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete">
@@ -135,7 +136,7 @@
                     <p class="comment-date" th:text="|Dodano: ${#temporals.format(comment.dateAdded, 'dd-MM-yyyy')}|">
                         Data dodania</p>
                     <a href="#" th:href="@{|/admin/usun-komentarz/${comment.id}|}" class="admin-delete"
-                       sec:authorize="hasRole('ADMIN')">Usuń</a>
+                       onclick="return confirm('Czy na pewno chcesz usunąć ?')" sec:authorize="hasRole('ADMIN')">Usuń</a>
                 </li>
             </ul>
             <div th:if="${comments.size() >= 5}" class="show-comments">
