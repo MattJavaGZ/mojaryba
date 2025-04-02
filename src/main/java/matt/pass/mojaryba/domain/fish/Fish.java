@@ -1,6 +1,7 @@
 package matt.pass.mojaryba.domain.fish;
 
 import jakarta.persistence.*;
+import matt.pass.mojaryba.domain.comment.Comment;
 import matt.pass.mojaryba.domain.like.Like;
 import matt.pass.mojaryba.domain.photos.FishPhotos;
 import matt.pass.mojaryba.domain.rating.Rating;
@@ -30,14 +31,15 @@ public class Fish {
     @ManyToOne
     @JoinColumn(name = "fish_type_id", referencedColumnName = "id")
     private FishType fishType;
-    @OneToMany(mappedBy = "fish")
+    @OneToMany(mappedBy = "fish", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
-    @OneToMany(mappedBy = "fish")
+    @OneToMany(mappedBy = "fish", cascade = CascadeType.REMOVE)
     private List<Like> likes = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
+    @OneToMany(mappedBy = "fish", cascade = CascadeType.REMOVE)
+    private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -150,6 +152,14 @@ public class Fish {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

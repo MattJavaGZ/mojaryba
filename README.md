@@ -1,2 +1,2 @@
 # env
-## prod: www.mojaryba.pl 
+## prod: www.moja-ryba.pl

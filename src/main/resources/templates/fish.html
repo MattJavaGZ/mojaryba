@@ -11,12 +11,17 @@
     <p class="notification" th:if="${notification}" th:text="${notification}">
         Belka z powiadomieniami
     </p>
+
+    <div class="fish-title">
+        <h1 class="fish-detail-title" th:text="${fish.title}">Tytuł okazu</h1>
+    </div>
+
     <section class="fish">
         <div class="fish-details">
             <img src="../static/img/empty1.jpg" th:src="@{|/photos/${fish.photos.get(0)}|}" alt="Zdjęcie ryby"
                  class="fish-detail-photo">
             <div class="fish-details-info">
-                <h1 class="fish-detail-title" th:text="${fish.title}">Tytuł okazu</h1>
+                <!--                <h1 class="fish-detail-title" th:text="${fish.title}">Tytuł okazu</h1>-->
                 <p class="fish-detail-item">Gatunek: <a href="#"
                                                         th:href="@{|/gatunek/${fish.fishType}|}"
                                                         th:text="${fish.fishType}">Karp</a>
@@ -29,7 +34,7 @@
                    th:text="${!fish.bait.isEmpty()} ? 'Przynęta: '+${fish.bait} : 'Przynęta: Brak'">Przynęta:
                     kukurydza</p>
                 <p class="fish-detail-item"
-                   th:text="${!fish.fishingMethod.isEmpty()} ? 'Meotda połowu: '+${fish.fishingMethod} : 'Metoda połowu: Brak'">
+                   th:text="${!fish.fishingMethod.isEmpty()} ? 'Metoda połowu: '+${fish.fishingMethod} : 'Metoda połowu: Brak'">
                     Metoda połowu: Grunt</p>
                 <p class="fish-detail-item"
                    th:text="${!fish.fishingSpot.isEmpty()} ? 'Nazwa łowiska: ' +${fish.fishingSpot} :'Nazwa łowiska: Brak'">
@@ -37,28 +42,43 @@
                     łowiska: Mocate</p>
                 <p class="fish-detail-item"
                    th:text="|Data dodania: ${#temporals.format(fish.dateAdded, 'dd-MM-yyyy')}|"></p>
-                <p class="fish-detail-item"
-                   th:text="|Autor: ${fish.author}|"></p>
+
+                <p class="fish-detail-item">Autor:
+                    <a href="#" th:href="@{|/uzytkownik/${fish.author}|}"
+                       th:text="${fish.author}">Autor</a>
+                </p>
             </div>
         </div>
         <div class="fish-favorite">
-            <!--            <a href="#"-->
-            <!--               th:href="${!@favorite.isExist(fish)} ? @{|/favorite/add/${fish.id}|} : @{|/favorite/delete/${fish.id}|}">-->
-            <!--                <i class="fa-heart" style="color: red"-->
-            <!--                   th:classappend="${!@favorite.isExist(fish)} ? 'fa-regular' : 'fa-solid'"-->
-            <!--                   th:text="${!@favorite.isExist(fish)} ? ' Dodaj do ulubionych' : ' Usuń z ulubionych'"></i>-->
-            <!--            </a>-->
+
             <a href="#" th:href="@{|/admin/usun/${fish.id}|}" sec:authorize="hasRole('ADMIN')" class="admin-delete">
                 Usuń okaz
             </a>
-            <a href="#" th:href="@{|/admin/edytuj/${fish.id}|}" sec:authorize="hasRole('ADMIN')" class="admin-delete">
+            <a th:if="${edit}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete">
                 Edytuj okaz
             </a>
-            <a th:if="${!@favorite.isExist(fish)}" href="#" th:href="@{|/favorite/add/${fish.id}|}">
+
+<!--            <a sec:authorize="!hasRole('ADMIN')" th:if="${fish.author}==${currentUserNick}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete">-->
+<!--                Edytuj swój okaz-->
+<!--            </a>-->
+<!--            <a sec:authorize="hasRole('ADMIN')" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete">-->
+<!--                Edytuj okaz-->
+<!--            </a>-->
+
+<!--            <a th:if="${!@favorite.isExist(fish)}" href="#" th:href="@{|/favorite/add/${fish.id}|}">-->
+<!--                <i class="fa-regular fa-heart favorite-icon"></i>-->
+<!--                Dodaj do ulubionych-->
+<!--            </a>-->
+<!--            <a th:if="${@favorite.isExist(fish)}" href="#" th:href="@{|/favorite/delete/${fish.id}|}">-->
+<!--                <i class="fa-solid fa-heart favorite-icon"></i>-->
+<!--                Usuń z ulubionych-->
+<!--            </a>-->
+
+            <a th:if="${!favorites.contains(fish)}" href="#" th:href="@{|/favorite/add/${fish.id}|}">
                 <i class="fa-regular fa-heart favorite-icon"></i>
                 Dodaj do ulubionych
             </a>
-            <a th:if="${@favorite.isExist(fish)}" href="#" th:href="@{|/favorite/delete/${fish.id}|}">
+            <a th:if="${favorites.contains(fish)}" href="#" th:href="@{|/favorite/delete/${fish.id}|}">
                 <i class="fa-solid fa-heart favorite-icon"></i>
                 Usuń z ulubionych
             </a>
@@ -101,30 +121,38 @@
             </a>
         </div>
     </section>
-    <section class="fish-section">
+    <section class="comments-section">
         <h2 class="fish-section-heading">Komentarze</h2>
         <div class="fish-comments-container">
-        <ul class="comments-list">
-            <li class="comment" th:each="comment: ${comments}">
-                <p class="comment-nick" th:text="|Nick: ${comment.userNick}|">Autor</p>
-                <p class="comment-content" th:text="${comment.content}">Treść komentarza</p>
-                <p class="comment-date" th:text="|Dodano: ${#temporals.format(comment.dateAdded, 'dd-MM-yyyy')}|">Data dodania</p>
-                <a href="#" th:href="@{|/admin/usun-komentarz/${comment.id}|}" class="admin-delete"
-                   sec:authorize="hasRole('ADMIN')">Usuń</a>
-            </li>
-        </ul>
+            <ul class="comments-list">
+                <li class="comment" th:each="comment: ${comments}">
+
+                    <p class="comment-nick"> Autor: <a href="#" th:href="@{|/uzytkownik/${comment.userNick}|}"
+                                                th:text="${comment.userNick}">Autor</a>
+                    </p>
+
+                    <p class="comment-content" th:text="${comment.content}">Treść komentarza</p>
+                    <p class="comment-date" th:text="|Dodano: ${#temporals.format(comment.dateAdded, 'dd-MM-yyyy')}|">
+                        Data dodania</p>
+                    <a href="#" th:href="@{|/admin/usun-komentarz/${comment.id}|}" class="admin-delete"
+                       sec:authorize="hasRole('ADMIN')">Usuń</a>
+                </li>
+            </ul>
             <div th:if="${comments.size() >= 5}" class="show-comments">
-            <a href="#" th:href="${comments.size() == 5} ? @{|/okaz/${fish.id}?commentsSize=all|} : @{|/okaz/${fish.id}|}"
-            th:text="${comments.size() == 5} ? 'Pokaż więcej komentarzy' : 'Pokaż mniej komentarzy'"></a>
+                <a href="#"
+                   th:href="${comments.size() == 5} ? @{|/okaz/${fish.id}?commentsSize=all|} : @{|/okaz/${fish.id}|}"
+                   th:text="${comments.size() == 5} ? 'Pokaż więcej komentarzy' : 'Pokaż mniej komentarzy'"></a>
             </div>
 
-        <p sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Zaloguj się</a>, aby dodać komentarz</p>
-        <form sec:authorize="isAuthenticated()" class="form-comment" action="#" th:action="@{/dodaj-komentarz}" method="post">
-            <h4 class="fish-section-heading">Dodaj komentarz</h4>
-            <textarea id="content" name="content" cols="30" rows="5" placeholder="Treść komentarza"></textarea>
-            <input type="number" name="id" hidden th:value="${fish.id}">
-            <button class="form-button-comment" type="submit">Dodaj</button>
-        </form>
+            <p sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Zaloguj się</a>, aby dodać komentarz
+            </p>
+            <form sec:authorize="isAuthenticated()" class="form-comment" action="#" th:action="@{/dodaj-komentarz}"
+                  method="post">
+                <h4 class="fish-section-heading">Dodaj komentarz</h4>
+                <textarea id="content" name="content" cols="30" rows="5" placeholder="Treść komentarza"></textarea>
+                <input type="number" name="id" hidden th:value="${fish.id}">
+                <button class="form-button-comment" type="submit">Dodaj</button>
+            </form>
         </div>
     </section>
 </main>

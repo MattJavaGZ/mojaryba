@@ -7,6 +7,7 @@ import matt.pass.mojaryba.domain.type.FishTypeService;
 import matt.pass.mojaryba.domain.type.dto.FishTypeDto;
 import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -22,9 +24,9 @@ import java.util.List;
 @Controller
 public class FishManagementController {
     public final static String NOTIFICATION_ATTRIBUTE = "notification";
-    private FishService fishService;
-    private FishTypeService fishTypeService;
-    private UserService userService;
+    private final FishService fishService;
+    private final FishTypeService fishTypeService;
+    private final UserService userService;
 
     public FishManagementController(FishService fishService, FishTypeService fishTypeService, UserService userService) {
         this.fishService = fishService;
@@ -49,11 +51,12 @@ public class FishManagementController {
         } else {
             final String userEmail = authentication.getName();
             final User user = userService.findUserByEmail(userEmail).orElseThrow();
-            final long savedFishId = fishService.saveFish(fish, user);
+            final long savedFishId = fishService.createFishFromForm(fish, user);
             redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Okaz został dodany");
             return "redirect:/okaz/" + savedFishId;
         }
     }
+
     private void getAllTypes(Model model) {
         List<FishTypeDto> types = fishTypeService.findAllTypes();
         model.addAttribute("types", types);
@@ -64,24 +67,39 @@ public class FishManagementController {
         fishService.deleteFishById(id);
         return "redirect:/";
     }
-    @GetMapping("/admin/edytuj/{id}")
-    String editFishForm(Model model, @PathVariable long id){
-        final FishToSaveDto fishToEdit = fishService.findByIdToSave(id);
-        model.addAttribute("fish", fishToEdit);
-        model.addAttribute("id", id);
-        getAllTypes(model);
-        return "fish-edit-form";
-    }
-    @PostMapping("/admin/edytuj/{id}")
-    String editFish(Model model, @PathVariable long id, @Valid @ModelAttribute("fish") FishToSaveDto fish,
-                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()){
+
+    @GetMapping("/okaz/edytuj/{id}")
+    String editFishForm(Model model, @PathVariable long id) {
+        final boolean isAdminOrAuthor = fishService.verificationFishAuthorOrAdmin(id);
+        if (!isAdminOrAuthor) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        } else {
+            final FishToSaveDto fishToEdit = fishService.findByIdToSave(id);
+            model.addAttribute("fish", fishToEdit);
+            model.addAttribute("id", id);
             getAllTypes(model);
             return "fish-edit-form";
+        }
+
+    }
+
+    @PostMapping("/okaz/edytuj/{id}")
+    String editFish(Model model, @PathVariable long id, @Valid @ModelAttribute("fish") FishToSaveDto fish,
+                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        final boolean isAdminOrAuthor = fishService.verificationFishAuthorOrAdmin(id);
+        if (!isAdminOrAuthor) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         } else {
-            fishService.editFish(fish, id);
-            redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Okaz został zaktualizowany");
-            return "redirect:/okaz/" + id;
+            if (bindingResult.hasErrors()) {
+                getAllTypes(model);
+                return "fish-edit-form";
+            } else {
+                fishService.editFish(fish, id);
+                redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Okaz został zaktualizowany");
+                return "redirect:/okaz/" + id;
+            }
         }
     }
+
+
 }

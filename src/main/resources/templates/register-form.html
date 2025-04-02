@@ -9,6 +9,11 @@
 <main class="main-content" layout:fragment="content">
   <h1 class="list-heading">Rejestracja użytkownika</h1>
 
+  <div th:if="${heading}">
+    <h2 class="list-heading" th:text="${heading}">Rejestracja nieudana</h2>
+    <h3 class="list-heading" th:text="${description}">Opis</h3>
+  </div>
+
   <form th:action="@{/rejestracja}" method="post" th:object="${user}" class="form">
 
     <label for="nick">Nazwa użytkownika</label>

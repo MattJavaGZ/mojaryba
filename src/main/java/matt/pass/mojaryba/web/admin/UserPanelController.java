@@ -1,10 +1,12 @@
 package matt.pass.mojaryba.web.admin;
 
+import matt.pass.mojaryba.domain.fish.FishSearchService;
 import matt.pass.mojaryba.domain.fish.FishService;
 import matt.pass.mojaryba.domain.fish.dto.FishDto;
 import matt.pass.mojaryba.domain.type.FishTypeService;
 import matt.pass.mojaryba.domain.type.dto.FishTypeDto;
 import matt.pass.mojaryba.domain.user.User;
+import matt.pass.mojaryba.domain.user.UserAdminService;
 import matt.pass.mojaryba.domain.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,14 +22,19 @@ import java.util.List;
 
 @Controller
 public class UserPanelController {
-    private FishService fishService;
-    private FishTypeService fishTypeService;
-    private UserService userService;
+    private final FishService fishService;
+    private final FishSearchService fishSearchService;
+    private final FishTypeService fishTypeService;
+    private final UserService userService;
+    private final UserAdminService userAdminService;
 
-    public UserPanelController(FishService fishService, FishTypeService fishTypeService, UserService userService) {
+    public UserPanelController(FishService fishService, FishSearchService fishSearchService,
+                               FishTypeService fishTypeService, UserService userService, UserAdminService userAdminService) {
         this.fishService = fishService;
+        this.fishSearchService = fishSearchService;
         this.fishTypeService = fishTypeService;
         this.userService = userService;
+        this.userAdminService = userAdminService;
     }
 
     @GetMapping("/panel")
@@ -100,7 +107,7 @@ public class UserPanelController {
     @GetMapping("/panel/dziennik-polowow/szukaj")
     String fishingLogFind(Model model, @RequestParam String find, Authentication authentication) {
         final String userEmail = authentication.getName();
-        final List<FishDto> fishes = fishService.searchInUserFishes(userEmail, find);
+        final List<FishDto> fishes = fishSearchService.searchInUserFishes(userEmail, find);
         String summary = String.format("Wyszukane okazy - %d szt.", fishes.size());
         sendAtributes(model, fishes, summary);
         return "user-panel-fishing-log";
@@ -141,7 +148,7 @@ public class UserPanelController {
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Podany nick jest już zajęty");
         }else {
-            userService.adminEditUserNick(nick, user.getId());
+            userAdminService.adminEditUserNick(nick, user.getId());
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Nick został zmieniony");
         }
@@ -153,7 +160,7 @@ public class UserPanelController {
         final String userEmail = authentication.getName();
         final User user = userService.findUserByEmail(userEmail).orElseThrow();
         if (password1.equals(password2)) {
-            userService.adminEditUserPass(password1, user.getId());
+            userAdminService.adminEditUserPass(password1, user.getId());
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Hasło zostało zmienione");
         } else {

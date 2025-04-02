@@ -1,6 +1,6 @@
 package matt.pass.mojaryba.web;
 
-import matt.pass.mojaryba.domain.email.EmailService;
+import matt.pass.mojaryba.infrastructure.email.EmailService;
 import matt.pass.mojaryba.web.admin.FishManagementController;
 import org.apache.commons.mail.EmailException;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ContactController {
-    private EmailService emailService;
+    private final EmailService emailService;
 
     public ContactController(EmailService emailService) {
         this.emailService = emailService;

@@ -1,4 +1,4 @@
-package matt.pass.mojaryba.domain.config;
+package matt.pass.mojaryba.infrastructure.config;
 
 import matt.pass.mojaryba.domain.user.UserService;
 import matt.pass.mojaryba.domain.user.dto.UserCredentialsDto;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private UserService userService;
+    private final UserService userService;
 
     public CustomUserDetailsService(UserService userService) {
         this.userService = userService;

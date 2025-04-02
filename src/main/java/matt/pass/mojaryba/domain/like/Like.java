@@ -14,11 +14,9 @@ public class Like {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "fish_id")
-    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Fish fish;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
 
     public Like(Fish fish, User user) {

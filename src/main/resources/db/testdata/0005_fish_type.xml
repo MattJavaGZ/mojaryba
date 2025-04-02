@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0005_2" author="Matt">
+        <sql>
+        insert into fish_type (name, fish_species) values ('Karp', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Karaś', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Amur', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Leszcz', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Lin', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Szczupak', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Sum', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Boleń', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Sandacz', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Pstrąg', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Okoń', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Płoć', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Węgorz', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Jesiotr', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Wzdręga', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Brzana', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Jaź', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Kleń', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Tołpyga', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Świnka', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Lipień', 'PREDATOR');
+        insert into fish_type (name, fish_species) values ('Certa', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Ukleja', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Krąp', 'WHITEFISH');
+        insert into fish_type (name, fish_species) values ('Inny', 'OTHER');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

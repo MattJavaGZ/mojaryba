@@ -7,7 +7,7 @@ import matt.pass.mojaryba.domain.user.User;
 import java.time.LocalDateTime;
 
 @Entity
-public class Comment implements Comparable<Comment>{
+public class Comment implements Comparable<Comment> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +19,7 @@ public class Comment implements Comparable<Comment>{
     private Fish fish;
     private String content;
     private LocalDateTime dateAdded;
+
     public Comment(User user, Fish fish, String content) {
         this.user = user;
         this.fish = fish;

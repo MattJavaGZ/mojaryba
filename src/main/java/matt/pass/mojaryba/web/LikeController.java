@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Controller
 public class LikeController {
@@ -15,10 +16,9 @@ public class LikeController {
     }
 
     @GetMapping("/like/{id}")
-    String updateLikeFish(@PathVariable long id, Authentication authentication){
+    String updateLikeFish(@PathVariable long id, Authentication authentication, @RequestHeader String referer){
         final String userEmail = authentication.getName();
         likeService.addOrUpdateLike(userEmail, id);
-        return "redirect:/";
-
+        return "redirect:" + referer;
     }
 }

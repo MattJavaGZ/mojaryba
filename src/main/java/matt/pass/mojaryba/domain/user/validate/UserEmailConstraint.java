@@ -12,7 +12,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = UserEmailValodator.class)
+@Constraint(validatedBy = UserEmailValidator.class)
 @Target({FIELD, PARAMETER})
 @Retention(RUNTIME)
 public @interface UserEmailConstraint {

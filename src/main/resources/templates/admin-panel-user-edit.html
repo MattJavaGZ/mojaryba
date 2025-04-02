@@ -52,7 +52,7 @@
         </div>
         <div class="admin-user-item-edit">
             <p th:text="${user.isBlocked()} ? 'User zablokowany&nbsp' : 'Brak blokady&nbsp'"></p>
-            <a  href="#" th:href="${user.isBlocked()} ? @{|/admin/unblock/${user.id}|} : @{|/admin/block/${user.id}|}"
+            <a  href="#" th:href="${user.isBlocked()} ? @{|/admin/odblokuj/${user.id}|} : @{|/admin/blokuj/${user.id}|}"
                 th:text="${user.isBlocked()} ? ' - Odblokuj' : ' - Zablokuj'"></a>
         </div>
 

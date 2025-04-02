@@ -25,13 +25,13 @@
         </select>
 
         <div id="photos-add-container">
-            <label for="file-input">Zdjęcie główne *</label>
+            <label for="file-input">Zdjęcie główne * (Max 10MB)</label>
             <input id="file-input" type="file" th:field="*{photos}" accept="image/jpeg, image/png" required>
         </div>
         <button id="add-photo-button" type="button">Dodaj kolejne zdjęcie</button>
 
         <label for="weight">Waga w kg</label>
-        <input type="number" id="weight" th:field="*{weight}">
+        <input type="number" step="0.1" id="weight" th:field="*{weight}">
         <p th:errors="*{weight}">Błędy związane z wagą</p>
 
         <label for="lenght">Długość w cm</label>

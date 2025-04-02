@@ -1,6 +1,6 @@
 package matt.pass.mojaryba.domain.user.dto;
 
-import matt.pass.mojaryba.domain.config.CustomSecurityService;
+import matt.pass.mojaryba.infrastructure.config.CustomSecurityService;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Moja-Ryba</title>
+    <title>Moja Ryba - Wędkarskie trofea  </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -16,6 +16,17 @@
     <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}">
     <script defer src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script>
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-81LM89MXC5"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-81LM89MXC5');
+</script>
+
 <body>
 <div class="container">
 <ul class="menu">
@@ -35,14 +46,14 @@
         <a href="#" th:href="@{/gatunki}">Gatunki</a>
     </li>
     <li class="menu-item">
-        <a href="#" th:href="@{/top10/oceniane}">Top10</a>
+        <a href="#" th:href="@{/top10/najwieksze}">Top10</a>
     </li>
     <li class="menu-item">
         <a href="#" th:href="@{/search-form}">Wyszukaj</a>
     </li>
     <li class="menu-item">
         <i class="fa-solid fa-heart" style="color: red"></i>
-        <a href="#" th:href="@{/favorite}" th:text="|Ulubione (${@favorite.getFavoriteSize()})|">Ulubione (0)</a>
+        <a href="#" th:href="@{/favorite}" >Ulubione</a>
     </li>
     <li class="menu-item">
         <a href="#" th:href="@{/panel}" class="account-button">Konto</a>
@@ -53,17 +64,20 @@
     </li>
 </ul>
 <header class="jumbotron">
+    <a href="#" th:href="@{/}">
     <h1 class="jumbotron-header">Moja-Ryba</h1>
     <p class="jumbotron-description">
-        Witaj na stronie Moja-Ryba. Wstawiaj swoje złowione ryby. Przeglądaj, oceniam i komentuj piękne okazy
+        Wstawiaj swoje złowione ryby. Przeglądaj, oceniaj i komentuj piękne okazy
         kolegów po kiju!
     </p>
+    </a>
 </header>
     <main class="main-content" layout:fragment="content">
 
     </main>
     <footer class="footer">
-        <p>Moja-Ryba.pl</p>
+        <a href="#" th:href="@{/rodo}">Informacje RODO</a>
+        <br>
         <a href="#" th:href="@{/kontakt}">Kontakt</a>
     </footer>
 </div>

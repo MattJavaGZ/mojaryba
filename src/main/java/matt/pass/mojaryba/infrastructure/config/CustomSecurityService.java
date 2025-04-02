@@ -1,6 +1,5 @@
-package matt.pass.mojaryba.domain.config;
+package matt.pass.mojaryba.infrastructure.config;
 
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,6 +26,7 @@ public class CustomSecurityService {
                 .requestMatchers("/like/**").hasAnyRole(ADMIN_ROLE, USER_ROLE)
                 .requestMatchers("/dodaj-komentarz").hasAnyRole(ADMIN_ROLE, USER_ROLE)
                 .requestMatchers("/ocen-rybe").hasAnyRole(ADMIN_ROLE, USER_ROLE)
+                .requestMatchers("/okaz/edytuj/**").hasAnyRole(ADMIN_ROLE, USER_ROLE)
                 .requestMatchers("/panel/**").authenticated()
                 .anyRequest().permitAll()
         );
@@ -35,7 +35,8 @@ public class CustomSecurityService {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout/**", HttpMethod.GET.name()))
                 .logoutSuccessUrl("/")
         );
-        http.csrf(csrt -> csrt.ignoringRequestMatchers(PathRequest.toH2Console()));
+//        http.csrf(csrt -> csrt.ignoringRequestMatchers(PathRequest.toH2Console()));
+        http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
         http.headers().frameOptions().sameOrigin();
 
         return http.build();

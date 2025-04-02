@@ -6,11 +6,11 @@ import matt.pass.mojaryba.domain.user.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserEmailValodator implements ConstraintValidator<UserEmailConstraint, String> {
+public class UserEmailValidator implements ConstraintValidator<UserEmailConstraint, String> {
 
-    private UserService userService;
+    private final UserService userService;
 
-    public UserEmailValodator(UserService userService) {
+    public UserEmailValidator(UserService userService) {
         this.userService = userService;
     }
 

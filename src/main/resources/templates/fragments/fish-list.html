@@ -37,11 +37,11 @@
             </div>
           </div>
           <div class="fish-list-like-favorite">
-            <a href="#"
-               th:href="${!@favorite.isExist(fish)} ? @{|/favorite/add/${fish.id}|} : @{|/favorite/delete/${fish.id}|}">
-              <i class="fa-heart" style="color: red"
-                 th:classappend="${!@favorite.isExist(fish)} ? 'fa-regular' : 'fa-solid'"></i>
-            </a>
+<!--            <a href="#"-->
+<!--               th:href="${!@favorite.isExist(fish)} ? @{|/favorite/add/${fish.id}|} : @{|/favorite/delete/${fish.id}|}">-->
+<!--              <i class="fa-heart" style="color: red"-->
+<!--                 th:classappend="${!@favorite.isExist(fish)} ? 'fa-regular' : 'fa-solid'"></i>-->
+<!--            </a>-->
 
             <a href="#" th:href="@{|/like/${fish.id}|}" >
               <i class="fa-thumbs-up fa-xl like"

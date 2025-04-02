@@ -1,10 +1,11 @@
-package matt.pass.mojaryba.files;
+package matt.pass.mojaryba.infrastructure.files;
 
 import matt.pass.mojaryba.domain.photos.FishPhotos;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
