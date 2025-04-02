@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Edycja danych użytkownika</title>
@@ -22,7 +21,7 @@
 <!--            <p th:text="|Nick: ${user.nick}&nbsp|"> Nick: </p>-->
                 <input type="text" minlength="3" id="nick" name="nick" placeholder="nowy nick" required>
 <!--            <a href="#" th:href="@{|/admin/edytuj-nick/${user.id}|}"> - Zmień</a>-->
-                <button type="submit">Zmień</button>
+                <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienić nick ?')">Zmień</button>
             </form>
         </div>
       <div class="admin-user-item-edit">
@@ -31,7 +30,7 @@
 <!--        <p th:text="|Email: ${user.email}&nbsp|">Email</p>-->
 <!--        <a href="#" th:href="@{|/admin/edytuj-email/${user.id}|}"> - Zmień</a>-->
               <input type="email" id="email" name="email" placeholder="nowy login" required>
-              <button type="submit">Zmień</button>
+              <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienic email ?')">Zmień</button>
           </form>
       </div>
         <div class="admin-user-item-edit">
@@ -40,7 +39,7 @@
 <!--          <a href="#" th:href="@{|/admin/edytuj-haslo/${user.id}|}"> - Zmień</a>-->
                 <label th:text="|Hasło: *** - |" for="password"></label>
                 <input type="password" minlength="8" id="password" name="password" placeholder="nowe hasło" required>
-                <button type="submit">Zmień</button>
+                <button type="submit" onclick="return confirm('Czy na pewno zmienić hasło ?')">Zmień</button>
             </form>
         </div>
        <div class="admin-user-item-edit">

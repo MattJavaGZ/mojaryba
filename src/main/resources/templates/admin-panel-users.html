@@ -27,7 +27,8 @@
         <p th:text="${user.nick}">Nick</p>
         <p th:text="${user.email}">Email</p>
         <a href="#" th:href="@{|/admin/uzytkownik/${user.id}|}">Edytuj</a>
-        <a href="#" th:href="@{|/admin/usun-uzytkownika/${user.id}|}">Usuń</a>
+        <a href="#" th:href="@{|/admin/usun-uzytkownika/${user.id}|}"
+           onclick="return confirm('Czy na pewno chcesz usunąć ?')">Usuń</a>
       </li>
     </ul>
   </div>
