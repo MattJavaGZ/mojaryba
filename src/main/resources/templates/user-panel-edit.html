@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +24,7 @@
         <form action="#" th:action="@{/panel/edycja-konta/edytuj-nick}" method="post">
           <label th:text="|Nick: ${user.nick} - |" for="nick"></label>
           <input type="text" minlength="3" id="nick" name="nick" placeholder="nowy nick" required>
-          <button type="submit">Zmień</button>
+          <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienić nick ?')">Zmień</button>
         </form>
       </div>
 
@@ -34,7 +33,7 @@
           <label th:text="|Hasło: *** - |" ></label>
           <input type="password" minlength="8"  name="password1" placeholder="nowe hasło" required>
           <input type="password" minlength="8" name="password2" placeholder="powtórz hasło" required>
-          <button type="submit">Zmień</button>
+          <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienić hasło ?')">Zmień</button>
         </form>
       </div>
 
