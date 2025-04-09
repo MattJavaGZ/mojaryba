@@ -19,7 +19,7 @@ a {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: lavender;
+    background-color: whitesmoke;
 }
 
 .fish-list-item-title {
@@ -46,24 +46,30 @@ a {
     justify-content: space-between;
 }
 
-.menu-item {
+.menu-item{
     width: 100%;
     padding: 16px;
-    border-bottom: 1px #6d6d6d solid;
     text-align: center;
     display: none;
+}
+.menu-notification{
+    display: block;
+    padding: 16px;
 }
 
 .expanded > .menu-item {
     display: block;
 }
-
+.expanded > .menu-notification {
+    display: none;
+}
 .menu-logo-container,
-.menu-toggle {
+.menu-toggle{
     display: block;
     padding: 16px 32px;
     font-size: 20px;
 }
+
 
 .footer {
     padding: 8px;
@@ -78,7 +84,8 @@ a {
         display: none;
     }
 
-    .menu-item {
+    .menu-item,
+    .menu-notification{
         display: block;
         width: auto;
         border-bottom: 0;
@@ -150,6 +157,7 @@ a {
     border-style: groove;
     border-width: 2px;
     /*min-height: 200px;*/
+    background-color: lavender;
 }
 
 .poster-container {
@@ -257,7 +265,11 @@ a {
     justify-content: space-between;
     align-items: center;
     min-width: 200px;
-
+    border-radius: 10px;
+    /*border-style: groove;*/
+    /*border-width: 1px;*/
+    /*border-color: black;*/
+    background-color: lavender;
 }
 
 
@@ -299,9 +311,9 @@ a {
 .fish-section {
     margin-top: 16px;
     padding: 16px;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 1px;
+    /*border-radius: 10px;*/
+    /*border-style: solid;*/
+    /*border-width: 1px;*/
     /*border-color: black;*/
 }
 
@@ -379,6 +391,17 @@ a {
 .types-list > li > a {
     color: black;
 }
+.notification-list{
+    list-style: none;
+    margin: auto;
+}
+.notification-list > li {
+    padding: 5px;
+    text-align: center;
+}
+.notification-list > li > a {
+    color: blue;
+}
 
 .form {
     display: flex;
@@ -455,7 +478,7 @@ a {
 
 .comment {
     border-radius: 10px;
-    border: 2px black solid;
+    border: 1px black solid;
     border-right: none;
     border-left: none;
     border-top: none;

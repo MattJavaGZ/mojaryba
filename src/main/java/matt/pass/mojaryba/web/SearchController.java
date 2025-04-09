@@ -18,11 +18,12 @@ public class SearchController {
         this.fishSearchService = fishSearchService;
     }
 
-    @GetMapping("/search-form")
+    @GetMapping("/szukaj-formularz")
     String searchForm(){
         return "search-form";
     }
-    @GetMapping("/search")
+
+    @GetMapping("/szukaj")
     String searchFishes(Model model, @RequestParam String search) {
         final List<FishDto> foundFishes = fishSearchService.searchFishes(search);
         model.addAttribute("heading", "Znalezione okazy");

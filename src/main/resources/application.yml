@@ -1,7 +1,7 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
 
   liquibase:
     change-log: classpath:db/changelog/master.xml
@@ -15,8 +15,8 @@ server:
   servlet:
     session:
       cookie:
-        max-age: 259200
-      timeout: 43200
+        max-age: 7776000
+      timeout: 2592000
 
   tomcat:
     relaxed-path-chars: ["|", "{", "}", "^", "`", "[", "]", "\\"]

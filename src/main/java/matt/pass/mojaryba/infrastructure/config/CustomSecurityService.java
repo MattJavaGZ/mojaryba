@@ -27,6 +27,7 @@ public class CustomSecurityService {
                 .requestMatchers("/dodaj-komentarz").hasAnyRole(ADMIN_ROLE, USER_ROLE)
                 .requestMatchers("/ocen-rybe").hasAnyRole(ADMIN_ROLE, USER_ROLE)
                 .requestMatchers("/okaz/edytuj/**").hasAnyRole(ADMIN_ROLE, USER_ROLE)
+                .requestMatchers("/powiadomienia").authenticated()
                 .requestMatchers("/panel/**").authenticated()
                 .anyRequest().permitAll()
         );
