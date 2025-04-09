@@ -6,20 +6,23 @@
     <title>Powiadomienia</title>
 </head>
 <body>
-  <div class="container">
-    <main class="main-content" layout:fragment="content">
-      <h1 class="list-heading">Twoje powiadomienia</h1>
 
+<div class="container">
+    <main class="main-content" layout:fragment="content">
+        <h1 class="list-heading">Twoje powiadomienia</h1>
+        <h3 class="list-heading" th:text="${emptyNotification}"></h3>
         <ul class="notification-list">
-          <li th:each="notification : ${notifications}">
-            <b><span th:text="${notification.getFish().getTitle()}">Karp</span></b>
-            <a href="#" th:href="@{|/okaz/${notification.getFish().getId()}|}"
-               th:style="${notification.isRead()} ? 'font-weight: normal' : 'font-weight: bold'"
-               th:text="${notification.getDescription()}">Sprawdz
-            </a>
-          </li>
+            <li th:each="notification : ${notifications}">
+                <span th:style="${notification.isRead()} ? 'font-weight: normal' : 'font-weight: bold'"
+                      th:text="${notification.getFish().getTitle()}">Karp</span>
+                <a href="#" th:href="@{|/okaz/${notification.getFish().getId()}|}"
+                   th:style="${notification.isRead()} ? 'font-weight: normal' : 'font-weight: bold'"
+                   th:text="${notification.getDescription()}">Sprawdz
+                </a>
+            </li>
         </ul>
     </main>
-  </div>
+</div>
+
 </body>
 </html>

@@ -20,12 +20,14 @@ public class NotificationController {
 
     @GetMapping("/powiadomienia")
     String getNotifications(Model model, Authentication authentication) {
-        if (authentication != null) {
-            final String userEmail = authentication.getName();
-            final List<NotificationDto> notificationsForUser = notificationService.getAllNotificationsForUser(userEmail);
-            model.addAttribute("notifications", notificationsForUser);
-            notificationService.setUserNotificationsOnRead(userEmail);
+        final String userEmail = authentication.getName();
+        final List<NotificationDto> notificationsForUser = notificationService.getAllNotificationsForUser(userEmail);
+        model.addAttribute("notifications", notificationsForUser);
+        if (notificationsForUser.isEmpty()) {
+            model.addAttribute("emptyNotification", "Nie masz jeszcze żadnego powiadomienia");
         }
+        notificationService.setUserNotificationsOnRead(userEmail);
+      
         return "notification";
     }
 }
