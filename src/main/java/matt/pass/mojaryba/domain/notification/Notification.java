@@ -18,7 +18,8 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "fish_id", referencedColumnName = "id")
     private Fish fish;
-    private boolean read;
+    @Column(name = "is_read")
+    private boolean isRead;
 
     public Long getId() {
         return id;
@@ -53,10 +54,10 @@ public class Notification {
     }
 
     public boolean isRead() {
-        return read;
+        return isRead;
     }
 
     public void setRead(boolean read) {
-        this.read = read;
+        isRead = read;
     }
 }
