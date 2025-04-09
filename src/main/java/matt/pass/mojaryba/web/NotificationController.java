@@ -27,7 +27,7 @@ public class NotificationController {
             model.addAttribute("emptyNotification", "Nie masz jeszcze żadnego powiadomienia");
         }
         notificationService.setUserNotificationsOnRead(userEmail);
-
+      
         return "notification";
     }
 }
