@@ -12,7 +12,10 @@
             <column name="name" type="VARCHAR(100)">
                 <constraints unique="true"/>
             </column>
-            <column name="fish_species" type="VARCHAR(10)"/>
+<!--            <column name="fish_species" type="VARCHAR(10)"/>-->
+            <column name="fish_species" type="ENUM('PREDATOR','WHITEFISH','OTHER')">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

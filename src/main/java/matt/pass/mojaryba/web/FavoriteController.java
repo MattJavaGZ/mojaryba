@@ -23,7 +23,7 @@ public class FavoriteController {
         this.favoriteService = favoriteService;
     }
 
-    @GetMapping("/favorite")
+    @GetMapping("/ulubione")
     String favorite(Model model, @CookieValue(value = "favorite", defaultValue = "") String favorite) {
         final Set<FishDto> favoritesList = favoriteService.getFavoritesList(favorite);
         model.addAttribute("heading", "Ulubione");
@@ -31,14 +31,14 @@ public class FavoriteController {
         model.addAttribute("fishes", favoritesList);
         return "fish-listing";
     }
-    @GetMapping("/favorite/add/{id}")
+    @GetMapping("/ulubione/add/{id}")
     String addToFavorite(@PathVariable long id, @CookieValue(value = "favorite", defaultValue = "") String favorite,
                          HttpServletResponse response, @RequestHeader String referer) {
         final String updatedFavoroteCookie = favoriteService.addToFavorite(favorite, id);
         createAndSendFavoriteCookie(response, updatedFavoroteCookie);
         return "redirect:" + referer;
     }
-    @GetMapping("/favorite/delete/{id}")
+    @GetMapping("/ulubione/delete/{id}")
     String deleteFromFavorite(@PathVariable long id,@CookieValue(value = "favorite", defaultValue = "") String favorite,
                               HttpServletResponse response,  @RequestHeader String referer) {
         final String updatedFavoroteCookie = favoriteService.deleteWithFavorite(favorite, id);

@@ -9,6 +9,7 @@ public class FishType {
     private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
+    @Column(name = "fish_species", nullable = false)
     private FishSpecies fishSpecies;
 
     public Long getId() {

@@ -35,6 +35,7 @@
             <i class="fa-sharp fa-solid fa-fish logo"></i> Moja-Ryba
         </a>
     </li>
+
     <li class="menu-toggle">
         <a href="#"><i id="toggle-icon" class="far fa-plus-square"></i> Menu</a>
     </li>
@@ -49,14 +50,23 @@
         <a href="#" th:href="@{/top10/najwieksze}">Top10</a>
     </li>
     <li class="menu-item">
-        <a href="#" th:href="@{/search-form}">Wyszukaj</a>
+        <a href="#" th:href="@{/szukaj-formularz}">Wyszukaj</a>
     </li>
     <li class="menu-item">
         <i class="fa-solid fa-heart" style="color: red"></i>
-        <a href="#" th:href="@{/favorite}" >Ulubione</a>
+        <a href="#" th:href="@{/ulubione}" >Ulubione</a>
     </li>
     <li class="menu-item">
         <a href="#" th:href="@{/panel}" class="account-button">Konto</a>
+    </li>
+    <li class="menu-notification" sec:authorize="isAuthenticated()">
+        <a href="#" th:href="@{/powiadomienia}">
+            <i th:class="${@notificationService.getUnreadNotificationsCount() > 0} ? 'fa-solid fa-bell' : 'fa-regular fa-bell'"
+               th:style="${@notificationService.getUnreadNotificationsCount() > 0} ? 'color: red' : 'color: blue'">
+            </i>
+            <span th:if="${@notificationService.getUnreadNotificationsCount() > 0}"
+                  th:text="${@notificationService.getUnreadNotificationsCount()}" style="color: red"></span>
+        </a>
     </li>
     <li class="menu-item" >
         <a sec:authorize="isAuthenticated()" href="#" th:href="@{/logout} ">Wyloguj</a>
