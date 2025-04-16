@@ -5,8 +5,6 @@ import matt.pass.mojaryba.domain.fish.FishRepository;
 import matt.pass.mojaryba.domain.notification.dto.NotificationDto;
 import matt.pass.mojaryba.infrastructure.email.EmailService;
 import org.apache.commons.mail.EmailException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,6 @@ public class NotificationService {
 
     private final static String COMMENT_DESCRIPTION = "Ktoś dodał komentarz to Twojej ryby! Sprawdź! ";
     private final static String RATING_DESCRIPTION = "Ktoś ocenił Twoją rybę! Sprawdź! ";
-    private static final Logger log = LoggerFactory.getLogger(NotificationService.class);
 
     private NotificationRepository notificationRepository;
     private FishRepository fishRepository;

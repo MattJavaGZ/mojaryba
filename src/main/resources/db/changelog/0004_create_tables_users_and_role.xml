@@ -16,7 +16,7 @@
             <column name="nick" type="VARCHAR(100)">
                 <constraints unique="true"/>
             </column>
-            <column name="activ" type="BOOLEAN"/>
+            <column name="activ" type="tinyint(1)"/>
             <column name="activ_key" type="VARCHAR(36)"/>
         </createTable>
         

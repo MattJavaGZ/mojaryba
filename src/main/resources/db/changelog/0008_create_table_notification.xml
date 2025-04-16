@@ -14,7 +14,7 @@
             </column>
             <column name="user_id" type="bigint"/>
             <column name="fish_id" type="bigint"/>
-            <column name="is_read" type="boolean"/>
+            <column name="is_read" type="tinyint(1)"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="notification" baseColumnNames="user_id" constraintName="con_notification_user"
                                  referencedTableName="users" referencedColumnNames="id"/>
