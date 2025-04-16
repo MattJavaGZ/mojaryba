@@ -1,0 +1,670 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+body {
+    /*font-family: 'Roboto', sans-serif;*/
+    font-family: "Comic Sans MS";
+}
+
+a {
+    text-decoration: none;
+    color: royalblue;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: whitesmoke;
+}
+
+.fish-list-item-title {
+    font-size: 1rem;
+}
+
+.fish-list-item-content,
+.fish-list-item-rating {
+    font-size: 0.8rem;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.logo,
+#toggle-icon {
+    color: royalblue;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.menu-item{
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    display: none;
+}
+.menu-notification{
+    display: block;
+    padding: 16px;
+}
+
+.expanded > .menu-item {
+    display: block;
+}
+.expanded > .menu-notification {
+    display: none;
+}
+.menu-logo-container,
+.menu-toggle{
+    display: block;
+    padding: 16px 32px;
+    font-size: 20px;
+}
+
+
+.footer {
+    padding: 8px;
+    text-align: center;
+    color: royalblue;
+    margin-top: 10px;
+}
+
+@media only screen and (min-width: 992px) {
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .menu-item,
+    .menu-notification{
+        display: block;
+        width: auto;
+        border-bottom: 0;
+    }
+
+    .menu-logo-container {
+        flex: 1;
+    }
+
+    .main-content,
+    .menu {
+        align-self: center;
+        width: 960px;
+    }
+
+    .fish-list-item-title {
+        font-size: 1.2rem;
+    }
+
+    .fish-list-item-content,
+    .fish-list-item-rating {
+        font-size: 0.9rem;
+    }
+
+    .fish-favorite {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 10px;
+
+    }
+}
+
+.jumbotron {
+    background-image: url("../img/jezioro.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 2rem;
+    text-align: center;
+}
+
+.jumbotron-header {
+    font-size: 3rem;
+    margin: 1rem 0;
+    color: white;
+}
+
+.jumbotron-description {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.list-heading,
+.list-description {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.fish-list {
+    list-style-type: none;
+}
+
+.fish-list-item {
+    margin-bottom: 16px;
+    display: flex;
+    /*border: 2px royalblue solid;*/
+    border-radius: 0 15px 15px 0;
+    /*border-style: groove;*/
+    /*border-width: 2px;*/
+    /*min-height: 200px;*/
+    background-color: hsl(220, 70%, 95%);
+    box-shadow: 8px 8px 16px #bebebe,
+    -8px -8px 16px #ffffff;
+}
+
+.poster-container {
+    margin: auto;
+}
+
+
+.fish-list-item-poster {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    margin: auto;
+}
+
+
+.fish-list-item-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    width: 100%;
+}
+
+.fish-description {
+    text-align: center;
+}
+
+.fish-list-item-content > * {
+    margin: 5px 0;
+}
+
+.fish-list-item-title > a {
+    color: black;
+}
+
+
+.fish-list-item-rating * {
+    color: royalblue;
+}
+
+.fish-list-item-rating-and-like {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fish-favorite {
+    text-align: center;
+}
+
+.fish-list-like-favorite {
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+
+.fish-list-like-favorite > button {
+    border: none;
+}
+
+.like {
+    color: royalblue;
+    opacity: 0.7;
+    font-size: medium;
+}
+
+.like:hover {
+    opacity: 1;
+}
+
+
+.fish-details {
+    display: flex;
+    margin-top: 10px;
+}
+
+
+.fish-detail-photo {
+    object-fit: contain;
+    max-width: 200px;
+}
+
+
+.fish-details-info {
+    margin-left: 16px;
+}
+
+
+.fish-detail-item {
+    margin: 8px 0;
+}
+
+
+.fish-detail-title {
+    font-size: 2rem;
+}
+
+
+.fish-rating-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 200px;
+    border-radius: 15px;
+    /*border-style: groove;*/
+    /*border-width: 1px;*/
+    /*border-color: black;*/
+    background-color: hsl(220, 70%, 95%);
+    box-shadow: 8px 8px 16px #bebebe,
+    -8px -8px 16px #ffffff;
+}
+
+
+.fish-rating-form > p {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+
+.fish-rating-value {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+
+.fish-rating-button {
+    background-color: royalblue;
+    border: 0;
+    padding: 4px;
+    font-size: 1.6rem;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+
+.fish-section-heading-rating {
+    font-size: 1rem;
+}
+
+
+.fish-rating-button:hover {
+    opacity: 1;
+}
+
+
+.fish-rating-container > * {
+    margin: 8px 0;
+}
+
+.fish-section {
+    margin-top: 16px;
+    padding: 16px;
+    /*border-radius: 10px;*/
+    /*border-style: solid;*/
+    /*border-width: 1px;*/
+    /*border-color: black;*/
+}
+
+.comments-section {
+    margin-top: 16px;
+    padding: 16px;
+}
+
+.fish-section-heading {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+@media only screen and (min-width: 992px) {
+    .fish {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .fish-rating-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .fish-rating-button {
+        font-size: 1.2rem;
+        margin: 0 4px;
+    }
+
+}
+
+.fish-gallery-container {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.fish-gallery-photo {
+    max-height: 200px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.error-container {
+    margin: 50px auto;
+    text-align: center;
+}
+
+.error-header {
+    margin-bottom: 20px;
+}
+
+.error-photo {
+    max-width: 500px;
+    max-height: 300px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.types-list {
+    list-style: none;
+    margin: auto;
+}
+
+.types-list > li {
+    font-size: 1.2rem;
+    /*border: 1px royalblue solid;*/
+    border-radius: 15px;
+    border-style: groove;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 8px 8px 16px #bebebe,
+    -8px -8px 16px #ffffff;
+}
+
+.types-list > li > a {
+    color: black;
+}
+.notification-list{
+    list-style: none;
+    margin: auto;
+}
+.notification-list > li {
+    padding: 5px;
+    text-align: center;
+}
+.notification-list > li > a {
+    color: blue;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 32px;
+}
+
+.form > * {
+    margin-top: 8px;
+}
+
+.form > input,
+.form > textarea,
+.form > select {
+    font-size: 1.2rem;
+    padding: 8px;
+}
+
+.form-button {
+    font-size: 1.2rem;
+    padding: 8px;
+    margin-top: 20px;
+    color: royalblue;
+    font-weight: bold;
+}
+
+.form > p {
+    color: red;
+}
+
+.notification {
+    text-align: center;
+    color: red;
+    padding: 8px 0;
+    font-size: large;
+    font-weight: bold;
+}
+
+#photos-add-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#photos-add-container > label {
+    margin-bottom: 5px;
+}
+
+#add-photo-button {
+    max-width: 150px;
+    margin-top: 5px;
+}
+
+.error-login-message {
+    text-align: center;
+    color: red;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.fish-favorite {
+    margin-left: 10px;
+}
+
+.favorite-icon {
+    color: red;
+}
+
+.fish-comments-container {
+    text-align: center;
+}
+
+.comment {
+    border-radius: 10px;
+    border: 1px black solid;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    list-style: none;
+    margin-top: 5px;
+}
+
+.comments-list {
+    margin-bottom: 10px;
+}
+
+.comment-nick {
+    font-size: x-small;
+    font-weight: bold;
+}
+
+.comment-content {
+    padding-top: 5px;
+}
+
+.comment-date {
+    font-size: x-small;
+    padding-top: 5px;
+}
+
+.form-comment {
+    display: flex;
+    flex-direction: column;
+    margin: 0 32px;
+}
+
+.form-comment > button {
+    margin-top: 5px;
+    color: royalblue;
+    font-weight: bold;
+}
+
+.show-comments {
+    font-size: x-small;
+    margin-bottom: 5px;
+}
+
+.user-panel-categories > ul {
+    list-style: none;
+    /*margin: 0;*/
+    /*padding: 0;*/
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap; /* dodane zawikanie */
+}
+
+/* kafelki mają wypełniać całą przestrzeń i być lekko przezroczyste */
+.user-panel-categories > ul > li {
+    flex-grow: 1;
+    padding: 0.5rem;
+    font-weight: 500;
+    border: 1px solid;
+    color: white;
+    opacity: 0.8;
+}
+
+/* po najechaniu na kafelek usuwamy przezroczystość */
+.user-panel-categories > ul > li:hover {
+    opacity: 1;
+}
+
+/* wyśrodkowanie tekstu na kafelkach i zmiana koloru linków */
+.user-panel-categories > ul > li > a {
+    color: inherit;
+    display: block;
+    text-align: center;
+    font-family: "Comic Sans MS";
+}
+
+.user-panel-categories > ul > li:nth-child(odd) {
+    background-color: blueviolet;
+}
+
+.user-panel-categories > ul > li:nth-child(even) {
+    background-color: cornflowerblue;
+}
+
+.user-panel-categories > ul > li:nth-child(last) {
+    background-color: red;
+}
+
+.account-button {
+    color: red;
+}
+
+.fishing-log-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.fishing-log-container {
+    margin-top: 15px;
+}
+
+.find-section {
+    border-radius: 5px;
+    border-style: groove;
+    margin-bottom: 15px;
+    background-color: lavender;
+}
+
+.form-user-log {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.form-user-log > * {
+    margin-top: 8px;
+}
+
+.form-user-log > button {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.fishing-log-summary {
+    margin-top: 15px;
+}
+
+.fishing-log-summary > h3 {
+    text-align: center;
+}
+
+.admin-delete {
+    color: red;
+    margin: 5px;
+}
+
+.form-users {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+}
+
+.form-users > * {
+    margin-top: 5px;
+    font-size: 1.2rem;
+}
+
+.users-list {
+    list-style-type: none;
+}
+
+.users-list > li {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0 5px 5px 0;
+    border-style: groove;
+    margin: 0 5px;
+}
+
+.users-list > li > * {
+    margin: 5px 10px;
+}
+
+.admin-user-item-edit {
+    display: flex;
+    margin-top: 10px;
+}
+
+.form-page {
+    display: flex;
+    justify-content: center;
+}
+
+.form-page > * {
+    margin: 5px;
+    font-size: small;
+}
+
+.fish-title {
+    text-align: center;
+    margin-top: 16px;
+}
+
