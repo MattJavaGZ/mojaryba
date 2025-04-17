@@ -18,8 +18,10 @@
 
     <section class="fish">
         <div class="fish-details">
+            <div>
             <img src="../static/img/empty1.jpg" th:src="@{|/photos/${fish.photos.get(0)}|}" alt="Zdjęcie ryby"
                  class="fish-detail-photo">
+            </div>
             <div class="fish-details-info">
                 <!--                <h1 class="fish-detail-title" th:text="${fish.title}">Tytuł okazu</h1>-->
                 <p class="fish-detail-item">Gatunek: <a href="#"

@@ -115,7 +115,13 @@ a {
         flex-direction: column;
         justify-content: flex-end;
         padding-bottom: 10px;
-
+    }
+    .fish-list-item-poster{
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+    .fish-detail-photo{
+        border-radius: 15px;
     }
 }
 
@@ -153,7 +159,8 @@ a {
     margin-bottom: 16px;
     display: flex;
     /*border: 2px royalblue solid;*/
-    border-radius: 0 15px 15px 0;
+    /*border-radius: 0 15px 15px 0;*/
+    border-radius: 15px;
     /*border-style: groove;*/
     /*border-width: 2px;*/
     /*min-height: 200px;*/
@@ -172,6 +179,7 @@ a {
     max-width: 200px;
     max-height: 200px;
     margin: auto;
+
 }
 
 
@@ -239,10 +247,11 @@ a {
     margin-top: 10px;
 }
 
-
 .fish-detail-photo {
     object-fit: contain;
     max-width: 200px;
+    display: block;
+    margin-top: 20px;
 }
 
 
@@ -360,6 +369,7 @@ a {
     max-height: 200px;
     margin-left: 5px;
     margin-right: 5px;
+    border-radius: 15px;
 }
 
 .error-container {
