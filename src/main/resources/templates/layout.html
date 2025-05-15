@@ -30,36 +30,36 @@
 <body>
 <div class="container">
 <ul class="menu">
-    <li class="menu-logo-container">
+    <li class="menu-logo-container interactive-item">
         <a href="#" th:href="@{/}">
-            <i class="fa-sharp fa-solid fa-fish logo"></i> Moja-Ryba
+            <i class="fa-sharp fa-solid fa-fish logo interactive-item"></i> Moja-Ryba
         </a>
     </li>
 
-    <li class="menu-toggle">
+    <li class="menu-toggle interactive-item">
         <a href="#"><i id="toggle-icon" class="far fa-plus-square"></i> Menu</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item interactive-item" >
         <i class="fa-duotone fa-plus fa-beat fa-2xl" style="color: red"></i>
         <a href="#" th:href="@{/dodaj-okaz}" >Dodaj</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item interactive-item">
         <a href="#" th:href="@{/gatunki}">Gatunki</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item interactive-item">
         <a href="#" th:href="@{/top10/najwieksze}">Top10</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item interactive-item">
         <a href="#" th:href="@{/szukaj-formularz}">Wyszukaj</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item interactive-item">
         <i class="fa-solid fa-heart" style="color: red"></i>
         <a href="#" th:href="@{/ulubione}" >Ulubione</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item interactive-item">
         <a href="#" th:href="@{/panel}" class="account-button">Konto</a>
     </li>
-    <li class="menu-notification" sec:authorize="isAuthenticated()">
+    <li class="menu-notification interactive-item" sec:authorize="isAuthenticated()">
         <a href="#" th:href="@{/powiadomienia}">
             <i th:class="${@notificationService.getUnreadNotificationsCount() > 0} ? 'fa-solid fa-bell' : 'fa-regular fa-bell'"
                th:style="${@notificationService.getUnreadNotificationsCount() > 0} ? 'color: red' : 'color: blue'">
@@ -68,7 +68,7 @@
                   th:text="${@notificationService.getUnreadNotificationsCount()}" style="color: red"></span>
         </a>
     </li>
-    <li class="menu-item" >
+    <li class="menu-item interactive-item" >
         <a sec:authorize="isAuthenticated()" href="#" th:href="@{/logout} ">Wyloguj</a>
         <a sec:authorize="!isAuthenticated()" href="#" th:href="@{/login} ">Zaloguj</a>
     </li>

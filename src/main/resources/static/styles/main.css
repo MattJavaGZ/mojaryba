@@ -5,8 +5,9 @@
 }
 
 body {
-    /*font-family: 'Roboto', sans-serif;*/
-    font-family: "Comic Sans MS";
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    -webkit-overflow-scrolling: touch; /* Płynne scrollowanie na iOS */
+    scroll-behavior: smooth; /* Płynne przewijanie przy linkach kotwicowych */
 }
 
 a {
@@ -46,13 +47,14 @@ a {
     justify-content: space-between;
 }
 
-.menu-item{
+.menu-item {
     width: 100%;
     padding: 16px;
     text-align: center;
     display: none;
 }
-.menu-notification{
+
+.menu-notification {
     display: block;
     padding: 16px;
 }
@@ -60,11 +62,13 @@ a {
 .expanded > .menu-item {
     display: block;
 }
+
 .expanded > .menu-notification {
     display: none;
 }
+
 .menu-logo-container,
-.menu-toggle{
+.menu-toggle {
     display: block;
     padding: 16px 32px;
     font-size: 20px;
@@ -85,7 +89,7 @@ a {
     }
 
     .menu-item,
-    .menu-notification{
+    .menu-notification {
         display: block;
         width: auto;
         border-bottom: 0;
@@ -116,11 +120,13 @@ a {
         justify-content: flex-end;
         padding-bottom: 10px;
     }
-    .fish-list-item-poster{
+
+    .fish-list-item-poster {
         border-top-left-radius: 15px;
         border-bottom-left-radius: 15px;
     }
-    .fish-detail-photo{
+
+    .fish-detail-photo {
         border-radius: 15px;
     }
 }
@@ -407,14 +413,17 @@ a {
 .types-list > li > a {
     color: black;
 }
-.notification-list{
+
+.notification-list {
     list-style: none;
     margin: auto;
 }
+
 .notification-list > li {
     padding: 5px;
     text-align: center;
 }
+
 .notification-list > li > a {
     color: blue;
 }
@@ -571,15 +580,11 @@ a {
 }
 
 .user-panel-categories > ul > li:nth-child(odd) {
-    background-color: blueviolet;
+    background-color: lightskyblue;
 }
 
 .user-panel-categories > ul > li:nth-child(even) {
     background-color: cornflowerblue;
-}
-
-.user-panel-categories > ul > li:nth-child(last) {
-    background-color: red;
 }
 
 .account-button {
@@ -600,7 +605,7 @@ a {
     border-radius: 5px;
     border-style: groove;
     margin-bottom: 15px;
-    background-color: lavender;
+    background-color: hsl(220, 70%, 95%);
 }
 
 .form-user-log {
@@ -678,3 +683,30 @@ a {
     margin-top: 16px;
 }
 
+.interactive-item {
+    transition: transform 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.interactive-item:hover {
+    transform: scale(1.08); /* Delikatne powiększenie */
+}
+
+.fish-list-item {
+    overflow: hidden; /* Zapobiega wystawaniu elementów po transformacji */
+    transition: transform 0.3s ease;
+    will-change: transform, opacity;
+}
+
+.fish-list-item:hover {
+    transform: scale(1.02);
+}
+
+.fish-detail-photo {
+    transition: transform 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.fish-detail-photo:hover {
+    transform: scale(1.8);
+}

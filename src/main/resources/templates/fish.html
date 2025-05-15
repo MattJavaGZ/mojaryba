@@ -24,7 +24,7 @@
             </div>
             <div class="fish-details-info">
                 <!--                <h1 class="fish-detail-title" th:text="${fish.title}">Tytuł okazu</h1>-->
-                <p class="fish-detail-item">Gatunek: <a href="#"
+                <p class="fish-detail-item interactive-item">Gatunek: <a href="#"
                                                         th:href="@{|/gatunek/${fish.fishType}|}"
                                                         th:text="${fish.fishType}">Karp</a>
                 </p>
@@ -45,7 +45,7 @@
                 <p class="fish-detail-item"
                    th:text="|Data dodania: ${#temporals.format(fish.dateAdded, 'dd-MM-yyyy')}|"></p>
 
-                <p class="fish-detail-item">Autor:
+                <p class="fish-detail-item interactive-item">Autor:
                     <a href="#" th:href="@{|/uzytkownik/${fish.author}|}"
                        th:text="${fish.author}">Autor</a>
                 </p>
@@ -54,10 +54,10 @@
         <div class="fish-favorite">
 
             <a href="#" th:href="@{|/admin/usun/${fish.id}|}" sec:authorize="hasRole('ADMIN')"
-               onclick="return confirm('Czy na pewno chcesz usunąć ?')" class="admin-delete">
+               onclick="return confirm('Czy na pewno chcesz usunąć ?')" class="admin-delete interactive-item">
                 Usuń okaz
             </a>
-            <a th:if="${edit}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete">
+            <a th:if="${edit}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete interactive-item">
                 Edytuj okaz
             </a>
 
@@ -77,11 +77,11 @@
 <!--                Usuń z ulubionych-->
 <!--            </a>-->
 
-            <a th:if="${!favorites.contains(fish)}" href="#" th:href="@{|/favorite/add/${fish.id}|}">
+            <a th:if="${!favorites.contains(fish)}" href="#" th:href="@{|/favorite/add/${fish.id}|}" class="interactive-item">
                 <i class="fa-regular fa-heart favorite-icon"></i>
                 Dodaj do ulubionych
             </a>
-            <a th:if="${favorites.contains(fish)}" href="#" th:href="@{|/favorite/delete/${fish.id}|}">
+            <a th:if="${favorites.contains(fish)}" href="#" th:href="@{|/favorite/delete/${fish.id}|}" class="interactive-item">
                 <i class="fa-solid fa-heart favorite-icon"></i>
                 Usuń z ulubionych
             </a>
@@ -99,14 +99,14 @@
                 <!-- Identyfikator filmu, na który głosujemy-->
                 <p>Twoja ocena</p>
                 <input type="hidden" name="fishId" th:value="${fish.id}">
-                <div class="fish-rating-buttons">
-                    <button class="fish-rating-button" name="rating" th:value="${i}"
+                <div class="fish-rating-buttons ">
+                    <button class="fish-rating-button interactive-item" name="rating" th:value="${i}"
                             th:each="i : ${#numbers.sequence(1,5)}">
                         <i class="fa-star" th:classappend="${i > currentRating ? 'fa-regular' : 'fa-solid' }"></i>
                     </button>
                 </div>
             </form>
-            <p sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Zaloguj się</a>, aby oddać głos</p>
+            <p class="interactive-item" sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}">Zaloguj się</a>, aby oddać głos</p>
         </div>
 
     </section>
@@ -120,7 +120,7 @@
         <div class="fish-gallery-container">
             <a th:each="i: ${#numbers.sequence(0, fish.photos.size()-1)}" href="#"
                th:href="@{|/photos/${fish.photos.get(i)}|}">
-                <img src="#" th:src="@{|/photos/${fish.photos.get(i)}|}" alt="Zdjęcie ryby" class="fish-gallery-photo">
+                <img src="#" th:src="@{|/photos/${fish.photos.get(i)}|}" alt="Zdjęcie ryby" class="fish-gallery-photo interactive-item">
             </a>
         </div>
     </section>

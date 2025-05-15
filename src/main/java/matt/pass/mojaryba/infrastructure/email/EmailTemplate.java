@@ -43,7 +43,7 @@ public class EmailTemplate {
                         Poniżej znajdziesz link służący do ustawienia nowego hasła:
                         %s
                         
-                        Proszę o zignorowanie wiadomości jeżeli nie to nie Ty korzystałeś z przypomnienia hasła.
+                        Proszę o zignorowanie wiadomości jeżeli to nie Ty korzystałeś z przypomnienia hasła.
                         
                         Pozdrawiamy,
                         
