@@ -24,7 +24,7 @@
             </div>
             <div class="fish-details-info">
                 <!--                <h1 class="fish-detail-title" th:text="${fish.title}">Tytuł okazu</h1>-->
-                <p class="fish-detail-item interactive-item">Gatunek: <a href="#"
+                <p class="fish-detail-item">Gatunek: <a href="#"
                                                         th:href="@{|/gatunek/${fish.fishType}|}"
                                                         th:text="${fish.fishType}">Karp</a>
                 </p>
@@ -45,7 +45,7 @@
                 <p class="fish-detail-item"
                    th:text="|Data dodania: ${#temporals.format(fish.dateAdded, 'dd-MM-yyyy')}|"></p>
 
-                <p class="fish-detail-item interactive-item">Autor:
+                <p class="fish-detail-item">Autor:
                     <a href="#" th:href="@{|/uzytkownik/${fish.author}|}"
                        th:text="${fish.author}">Autor</a>
                 </p>
