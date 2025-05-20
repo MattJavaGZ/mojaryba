@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: "Poppins", serif;
     -webkit-overflow-scrolling: touch; /* Płynne scrollowanie na iOS */
     scroll-behavior: smooth; /* Płynne przewijanie przy linkach kotwicowych */
 }
@@ -21,6 +21,17 @@ a {
     flex-direction: column;
     min-height: 100vh;
     background-color: whitesmoke;
+}
+
+.jumbotron,
+.menu,
+.list-heading {
+   font-family: "Comic Neue", serif;
+}
+
+.fish-photo-container {
+    position: relative;
+    overflow: hidden;
 }
 
 .fish-list-item-title {
@@ -128,6 +139,10 @@ a {
 
     .fish-detail-photo {
         border-radius: 15px;
+    }
+    .fish-photo-container{
+        position: static;
+        overflow: visible;
     }
 }
 
@@ -586,7 +601,6 @@ a {
     color: inherit;
     display: block;
     text-align: center;
-    font-family: "Comic Sans MS";
 }
 
 .user-panel-categories > ul > li:nth-child(odd) {
