@@ -5,6 +5,8 @@ import matt.pass.mojaryba.domain.fish.FishRepository;
 import matt.pass.mojaryba.domain.fish.dto.FishDto;
 import org.springframework.stereotype.Service;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,11 +35,13 @@ public class FavoriteService {
     }
 
     public String addToFavorite(String favoriteCookie, Long fishId) {
-        return favoriteCookie + " " + fishId + ";";
+        final String decodeCookie = URLDecoder.decode(favoriteCookie, StandardCharsets.UTF_8);
+        return decodeCookie + " " + fishId + ";";
     }
 
     public String deleteWithFavorite(String favoriteCookie, Long fishId) {
-        return favoriteCookie.replaceAll(" " + fishId + ";", "");
+        final String decodeCookie = URLDecoder.decode(favoriteCookie, StandardCharsets.UTF_8);
+        return decodeCookie.replaceAll(" " + fishId + ";", "");
     }
 
 

@@ -77,11 +77,11 @@
 <!--                Usuń z ulubionych-->
 <!--            </a>-->
 
-            <a th:if="${!favorites.contains(fish)}" href="#" th:href="@{|/favorite/add/${fish.id}|}" class="interactive-item">
+            <a th:if="${!favorites.contains(fish)}" href="#" th:href="@{|/ulubione/add/${fish.id}|}" class="interactive-item">
                 <i class="fa-regular fa-heart favorite-icon"></i>
                 Dodaj do ulubionych
             </a>
-            <a th:if="${favorites.contains(fish)}" href="#" th:href="@{|/favorite/delete/${fish.id}|}" class="interactive-item">
+            <a th:if="${favorites.contains(fish)}" href="#" th:href="@{|/ulubione/delete/${fish.id}|}" class="interactive-item">
                 <i class="fa-solid fa-heart favorite-icon"></i>
                 Usuń z ulubionych
             </a>
