@@ -14,7 +14,7 @@ public class EmailSender {
         SimpleEmail email = new SimpleEmail();
         email.setHostName("smtp.poczta.onet.pl");
         email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator("matekjava@onet.pl", "Jakieshaslo123@"));
+        email.setAuthenticator(new DefaultAuthenticator("matekjava@onet.pl", "password"));
         email.setSSLOnConnect(true);
         email.setFrom("matekjava@onet.pl");
         email.setSubject(title);

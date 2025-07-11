@@ -92,4 +92,20 @@ public class EmailTemplate {
     private String generateUrlToFish(Fish fish) {
         return String.format("%s/okaz/%d", url, fish.getId());
     }
+
+    String generateEmailAboutNewFish(User user, long fishId) {
+        return """
+                Dzień dobry %s,
+                
+                ktoś dodał nowy, piękny okaz na stronie Moja-ryba.pl - Sprawdź to koniecznie!
+                
+                %s
+                
+                Pozdrawiamy,
+                """.formatted(user.getNick(), generateUrlToFish(fishId));
+    }
+
+    private String generateUrlToFish(long fishId) {
+        return String.format("%s/okaz/%d", url, fishId);
+    }
 }

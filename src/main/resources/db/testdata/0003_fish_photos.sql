@@ -1,7 +1,7 @@
-insert into fish_photos (fish_id, photo) values (1,  'rekin0.jpg');
-insert into fish_photos (fish_id, photo) values (1,  'logo0.jpg');
-insert into fish_photos (fish_id, photo) values (1,  'empty0.jpg');
-insert into fish_photos (fish_id, photo) values (1,  'logo0.jpg');
+insert into fish_photos (fish_id, photo) values (1,  'madzia.jpeg');
+insert into fish_photos (fish_id, photo) values (1,  '222.jpeg');
+insert into fish_photos (fish_id, photo) values (1,  'madzia.jpeg');
+insert into fish_photos (fish_id, photo) values (1,  '222.jpeg');
 
 insert into fish_photos (fish_id, photo) values (2,  'rekin0.jpg');
 insert into fish_photos (fish_id, photo) values (2,  'logo0.jpg');

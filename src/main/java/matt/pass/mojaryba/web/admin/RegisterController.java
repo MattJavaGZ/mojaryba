@@ -1,9 +1,11 @@
 package matt.pass.mojaryba.web.admin;
 
 import jakarta.validation.Valid;
+import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserAdminService;
 import matt.pass.mojaryba.domain.user.UserService;
 import matt.pass.mojaryba.domain.user.dto.UserRegisterDto;
+import matt.pass.mojaryba.infrastructure.email.EmailService;
 import org.apache.commons.mail.EmailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class RegisterController {
     private final UserService userService;
     private final UserAdminService userAdminService;
+    private final EmailService emailService;
 
-    public RegisterController(UserService userService, UserAdminService userAdminService) {
+    public RegisterController(UserService userService, UserAdminService userAdminService, EmailService emailService) {
         this.userService = userService;
         this.userAdminService = userAdminService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/rejestracja")
@@ -34,7 +38,8 @@ public class RegisterController {
             return "register-form";
         } else {
             try {
-                userService.register(user);
+                final User savedUser = userService.register(user);
+                emailService.sendActivEmail(savedUser);
                 model.addAttribute("heading", "Rejestracja przebiegła pomyślnie");
                 model.addAttribute("description",
                         "Na Twój adres email została wysłana wiadomość z linkiem aktywacyjnym. Aktywuj konto");

@@ -5,6 +5,8 @@ import matt.pass.mojaryba.domain.user.User;
 import org.apache.commons.mail.EmailException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmailService {
 
@@ -46,7 +48,14 @@ public class EmailService {
         emailSender.sendEmail(user.getEmail(), title, text);
     }
 
+    public void sendEmailsAboutNewFishesToAllUsers(List<User> users, long fishId) throws EmailException {
+        String tittle = "Nowe okazy na stronie Moja-Ryba.pl";
 
+        for (User user : users) {
+            String text = emailTemplate.generateEmailAboutNewFish(user, fishId);
+            emailSender.sendEmail(user.getEmail(), tittle, text);
+        }
+    }
 
 
 }

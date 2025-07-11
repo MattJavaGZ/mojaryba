@@ -1,6 +1,7 @@
 package matt.pass.mojaryba.web.admin;
 
 import matt.pass.mojaryba.domain.user.UserService;
+import matt.pass.mojaryba.infrastructure.email.EmailService;
 import org.apache.commons.mail.EmailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class PasswordRemindController {
     private UserService userService;
+    private EmailService emailService;
 
-    public PasswordRemindController(UserService userService) {
+    public PasswordRemindController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/przypomnienie-hasla")
@@ -28,7 +31,7 @@ public class PasswordRemindController {
         userService.findUserByEmail(email).ifPresentOrElse(
                 user -> {
                     try {
-                        userService.remindPassEmail(user);
+                        emailService.sendRemindPassEmail(user);
                         redirectAttributes.addFlashAttribute(
                                 FishManagementController.NOTIFICATION_ATTRIBUTE,
                                 "Na adres email %s został wysłany link służący do ustawienia nowego hasła.".formatted(email));

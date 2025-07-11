@@ -1,10 +1,9 @@
 package matt.pass.mojaryba.domain.user;
 
 import jakarta.transaction.Transactional;
-import matt.pass.mojaryba.infrastructure.config.CustomSecurityService;
-import matt.pass.mojaryba.infrastructure.email.EmailService;
 import matt.pass.mojaryba.domain.user.dto.UserCredentialsDto;
 import matt.pass.mojaryba.domain.user.dto.UserRegisterDto;
+import matt.pass.mojaryba.infrastructure.config.CustomSecurityService;
 import org.apache.commons.mail.EmailException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,14 +20,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRoleRepository userRoleRepository;
-    private final EmailService emailService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                       UserRoleRepository userRoleRepository, EmailService emailService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserRoleRepository userRoleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userRoleRepository = userRoleRepository;
-        this.emailService = emailService;
     }
 
     public Optional<UserCredentialsDto> findActivUserByEmail(String email) {
@@ -41,7 +37,7 @@ public class UserService {
         return userRepository.findByEmailIgnoreCase(email);
     }
 
-    public void register(UserRegisterDto userRegisterDto) throws EmailException {
+    public User register(UserRegisterDto userRegisterDto) throws EmailException {
         final User userToSave = new User();
         userToSave.setEmail(userRegisterDto.getEmail().toLowerCase());
         userToSave.setNick(userRegisterDto.getNick());
@@ -51,8 +47,7 @@ public class UserService {
         userToSave.setActivKey(generateActivKey());
         final UserRole defaultRole = userRoleRepository.findByName(CustomSecurityService.USER_ROLE).orElseThrow();
         userToSave.getRoles().add(defaultRole);
-        final User savedUser = userRepository.save(userToSave);
-        emailService.sendActivEmail(savedUser);
+        return userRepository.save(userToSave);
     }
 
     private String generateActivKey() {
@@ -76,10 +71,6 @@ public class UserService {
         return userRepository.existsByNickIgnoreCase(nick);
     }
 
-    public void remindPassEmail(User user) throws EmailException {
-        emailService.sendRemindPassEmail(user);
-    }
-
     @Transactional
     public boolean setNewPass(long id, String activKey, String newPassword) {
         final User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -100,5 +91,11 @@ public class UserService {
     public boolean isBlocked(User user) {
         final UserRole blockerRole = userRoleRepository.findByName(CustomSecurityService.BLOCKED_ROLE).orElseThrow();
         return user.getRoles().contains(blockerRole);
+    }
+
+    public List<User> findAllActiveUsersWithOutAuthor(User user){
+        final List<User> users = userRepository.findAllByActivIsTrue();
+        users.remove(user);
+        return users;
     }
 }

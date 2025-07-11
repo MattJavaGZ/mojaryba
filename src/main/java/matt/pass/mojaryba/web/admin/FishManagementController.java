@@ -7,6 +7,8 @@ import matt.pass.mojaryba.domain.type.FishTypeService;
 import matt.pass.mojaryba.domain.type.dto.FishTypeDto;
 import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserService;
+import matt.pass.mojaryba.infrastructure.email.EmailService;
+import org.apache.commons.mail.EmailException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -27,11 +29,13 @@ public class FishManagementController {
     private final FishService fishService;
     private final FishTypeService fishTypeService;
     private final UserService userService;
+    private final EmailService emailService;
 
-    public FishManagementController(FishService fishService, FishTypeService fishTypeService, UserService userService) {
+    public FishManagementController(FishService fishService, FishTypeService fishTypeService, UserService userService, EmailService emailService) {
         this.fishService = fishService;
         this.fishTypeService = fishTypeService;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/dodaj-okaz")
@@ -53,7 +57,18 @@ public class FishManagementController {
             final User user = userService.findUserByEmail(userEmail).orElseThrow();
             final long savedFishId = fishService.createFishFromForm(fish, user);
             redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Okaz został dodany");
+            sendNotificationsAboutNewFishes(savedFishId, user);
             return "redirect:/okaz/" + savedFishId;
+        }
+    }
+
+    private void sendNotificationsAboutNewFishes(long fishId, User user) {
+        final List<User> allActiveUsers = userService.findAllActiveUsersWithOutAuthor(user);
+        try {
+            emailService.sendEmailsAboutNewFishesToAllUsers(allActiveUsers, fishId);
+        } catch (EmailException e) {
+            System.err.println("Błąd wysyłki wiadomości o nowej rybie");
+            e.printStackTrace();
         }
     }
 
