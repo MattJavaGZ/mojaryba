@@ -18,4 +18,7 @@ server:
         max-age: 7776000
       timeout: 2592000
 
-
+app:
+  email:
+    login: matekjava@onet.pl
+    password: pass

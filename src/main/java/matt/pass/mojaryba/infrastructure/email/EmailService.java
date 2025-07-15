@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class EmailService {
 
-    private EmailSender emailSender;
-    private EmailTemplate emailTemplate;
+    private final EmailSender emailSender;
+    private final EmailTemplate emailTemplate;
 
     public EmailService(EmailSender emailSender, EmailTemplate emailTemplate) {
         this.emailSender = emailSender;
@@ -49,11 +49,18 @@ public class EmailService {
     }
 
     public void sendEmailsAboutNewFishesToAllUsers(List<User> users, long fishId) throws EmailException {
-        String tittle = "Nowe okazy na stronie Moja-Ryba.pl";
+        String tittle = "Nowy okaz na stronie Moja-Ryba.pl";
 
         for (User user : users) {
             String text = emailTemplate.generateEmailAboutNewFish(user, fishId);
             emailSender.sendEmail(user.getEmail(), tittle, text);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Przerwano wysyłke maili, e");
+                break;
+            }
         }
     }
 
