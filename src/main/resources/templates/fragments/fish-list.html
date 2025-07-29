@@ -32,7 +32,7 @@
               <div class="fish-list-item-rating">
                 Śr. ocen:
                 <i class="fas fa-star"></i>
-                <span th:text="${fish.ratingAvg}">8.7</span>
+                <span th:text="${#numbers.formatDecimal(fish.ratingAvg,1,1) }">8.7</span>
               </div>
             </div>
           </div>

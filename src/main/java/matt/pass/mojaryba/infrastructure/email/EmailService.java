@@ -55,7 +55,7 @@ public class EmailService {
             String text = emailTemplate.generateEmailAboutNewFish(user, fishId);
             emailSender.sendEmail(user.getEmail(), tittle, text);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Przerwano wysyłke maili, e");

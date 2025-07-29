@@ -88,7 +88,7 @@
 
         </div>
         <div class="fish-rating-container fish-section">
-            <h2 class="fish-section-heading-rating" th:text="|Średnia ocen: ${fish.ratingAvg}|">Średnia ocen: 4.0</h2>
+            <h2 class="fish-section-heading-rating" th:text="|Średnia ocen: ${#numbers.formatDecimal(fish.ratingAvg,1,1)}|">Średnia ocen: 4.0</h2>
             <div>
                 <p th:text="|Liczna ocen: ${fish.ratingCount}|">Liczba ocen: 134</p>
                 <p th:text="|Ilość lików: ${fish.likedUserEmails.size()}|">Ilość lików: 134</p>
