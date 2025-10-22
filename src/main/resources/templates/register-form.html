@@ -26,6 +26,12 @@
     <input type="password" id="password" th:field="*{password}" placeholder="Hasło" required>
     <p th:errors="*{password}">Błędy związane z hasłem</p>
 
+    <label class="statute-checkbox">
+      <input type="checkbox" name="acceptTerms" required >
+      Akceptuję <a href="/rodo" target="_blank">RODO</a>
+    </label>
+
+
     <button type="submit" class="form-button">Zarejestruj</button>
   </form>
 </main>
