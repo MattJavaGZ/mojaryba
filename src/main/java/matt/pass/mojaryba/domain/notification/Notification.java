@@ -18,7 +18,7 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "fish_id", referencedColumnName = "id")
     private Fish fish;
-    @Column(name = "is_read")
+    @Column(name = "is_read", columnDefinition = "TINYINT(1)")
     private boolean isRead;
 
     public Long getId() {

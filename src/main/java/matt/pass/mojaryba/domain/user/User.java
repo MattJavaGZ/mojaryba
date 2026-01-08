@@ -14,6 +14,7 @@ public class User {
     private String email;
     private String password;
     private String nick;
+    @Column(columnDefinition = "TINYINT(1)")
     private boolean activ;
     private String activKey;
     @ManyToMany(fetch = FetchType.EAGER)
