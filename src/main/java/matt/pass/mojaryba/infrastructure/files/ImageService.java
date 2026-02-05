@@ -106,6 +106,7 @@ public class ImageService {
 
             files
                     .filter(Files::isRegularFile)
+                    .filter(this::isImage)
                     .forEach(this::saveMiniature);
 
         } catch (IOException e) {
@@ -113,4 +114,8 @@ public class ImageService {
         }
     }
 
+    private boolean isImage(Path imagePath){
+        final String fileName = imagePath.getFileName().toString();
+        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
+    }
 }
