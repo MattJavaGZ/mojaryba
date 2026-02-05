@@ -115,7 +115,7 @@ public class ImageService {
     }
 
     private boolean isImage(Path imagePath){
-        final String fileName = imagePath.getFileName().toString();
+        final String fileName = imagePath.getFileName().toString().toLowerCase();
         return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
     }
 }
