@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Generuj miniatury</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+    <div th:replace="~{fragments/user-panel-categories :: categories}"></div>
+
+    <h2 class="list-heading">Wygeneruj miniatury do obecnych zdjęć</h2>
+
+    <div class="photos-button-container">
+        <form action="#" th:action="@{/admin/generuj-miniatury}">
+        <button class="form-button">Generuj miniatury</button>
+        </form>
+    </div>
+
+
+</main>
+</body>
+</html>
