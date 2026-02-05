@@ -13,7 +13,8 @@
         <li class="fish-list-item" th:each="fish: ${fishes}">
           <div class="poster-container">
           <a href="#" th:href="@{|/okaz/${fish.id}|}">
-            <img src="../static/img/mat%20karp.jpg" th:src="@{|/photos/${fish.photos.get(0)}|}"
+            <img src="../static/img/mat%20karp.jpg" th:src="@{|/miniatures/${fish.photos.get(0)}|}"
+                 loading="lazy"
                  alt="zdjęcie ryby"
                  class="fish-list-item-poster">
           </a>

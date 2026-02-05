@@ -672,19 +672,35 @@ a {
 }
 
 .users-list {
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .users-list > li {
-    display: flex;
-    justify-content: space-around;
-    border-radius: 0 5px 5px 0;
-    border-style: groove;
-    margin: 0 5px;
+    display: grid;
+    grid-template-columns: 200px 1fr 80px 80px;
+    align-items: center;
+
+    border: 1px groove #aaa;
+    border-radius: 5px;
+    margin: 6px 5px;
+    padding: 6px 10px;
 }
 
-.users-list > li > * {
-    margin: 5px 10px;
+.users-list > li > p {
+    margin: 0;
+}
+
+.users-list > li > a {
+    text-align: center;
+    text-decoration: none;
+    color: #2a55ff;
+    font-weight: 500;
+}
+
+.users-list > li > a:hover {
+    text-decoration: underline;
 }
 
 .admin-user-item-edit {
@@ -731,6 +747,10 @@ a {
     will-change: transform, opacity;
 }
 
-.fish-detail-photo:hover {
-    transform: scale(1.8);
+/*.fish-detail-photo:hover {*/
+/*    transform: scale(1.8);*/
+/*}*/
+.photos-button-container{
+    text-align: center;
 }
+

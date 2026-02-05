@@ -23,7 +23,7 @@ class ImageServiceTest {
 
     @BeforeEach
     void setUp() {
-    imageService = new ImageService("uploads/photos/");
+    imageService = new ImageService("uploads/photos/", "uploads/miniatures/");
     }
 
     @Test

@@ -18,6 +18,8 @@
         Zarządzaj userami</a></li>
       <li><a href="#" th:href="@{/panel/edycja-konta}">
         Edycja konta</a></li>
+      <li sec:authorize="hasRole('ADMIN')" ><a href="#" th:href="@{/admin/zdjecia}">
+        Zdjęcia</a></li>
     </ul>
     </section>
 </body>

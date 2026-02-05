@@ -19,7 +19,7 @@
     <section class="fish">
         <div class="fish-details">
             <div class="fish-photo-container">
-            <img src="../static/img/empty1.jpg" th:src="@{|/photos/${fish.photos.get(0)}|}" alt="Zdjęcie ryby"
+            <img src="../static/img/empty1.jpg" th:src="@{|/miniatures/${fish.photos.get(0)}|}" alt="Zdjęcie ryby"
                  class="fish-detail-photo">
             </div>
             <div class="fish-details-info">
@@ -120,7 +120,7 @@
         <div class="fish-gallery-container">
             <a th:each="i: ${#numbers.sequence(0, fish.photos.size()-1)}" href="#"
                th:href="@{|/photos/${fish.photos.get(i)}|}">
-                <img src="#" th:src="@{|/photos/${fish.photos.get(i)}|}" alt="Zdjęcie ryby" class="fish-gallery-photo interactive-item">
+                <img src="#" th:src="@{|/miniatures/${fish.photos.get(i)}|}" alt="Zdjęcie ryby" class="fish-gallery-photo interactive-item">
             </a>
         </div>
     </section>

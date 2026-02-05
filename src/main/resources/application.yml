@@ -8,8 +8,16 @@ spring:
   servlet:
     multipart:
       max-file-size: 20MB
+      max-request-size: 20MB
   profiles:
     active: dev
+
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          max-age: 30d
+          cache-public: true
 
 server:
   servlet:
@@ -22,3 +30,9 @@ app:
   email:
     login: matekjava@onet.pl
     password: pass
+
+  storage:
+    photo-location: uploads/photos/
+    miniature-photo-location: uploads/miniatures/
+
+

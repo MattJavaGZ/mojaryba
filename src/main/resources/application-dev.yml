@@ -12,7 +12,5 @@ spring:
       static-locations: classpath:/static/,file:uploads/
 
 app:
-  storage:
-    location: uploads/photos/
   email:
     url: http://localhost:8080
