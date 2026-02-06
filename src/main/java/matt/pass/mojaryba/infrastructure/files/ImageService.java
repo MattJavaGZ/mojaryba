@@ -43,6 +43,11 @@ public class ImageService {
     }
 
     public String saveImage(MultipartFile file) {
+        final String originalFilename = file.getOriginalFilename();
+
+        if (originalFilename == null || !isImage(originalFilename)) {
+            throw new IllegalArgumentException("Dozwolone tylko pliki graficzne");
+        }
 
         Path imagePath = createFilePath(file, imageStorageLocation);
         try {
@@ -74,6 +79,11 @@ public class ImageService {
         final String originalFilename = file.getOriginalFilename();
         final String baseName = FilenameUtils.getBaseName(originalFilename);
         final String extension = FilenameUtils.getExtension(originalFilename);
+
+        if (extension == null || extension.isBlank()) {
+            throw new IllegalArgumentException("Plik musi mieć rozszerzenie");
+        }
+
         String completeFileName;
         int index = 0;
         Path filePath;
@@ -106,16 +116,20 @@ public class ImageService {
 
             files
                     .filter(Files::isRegularFile)
-                    .filter(this::isImage)
+                    .filter(path -> isImage(path.getFileName().toString()))
                     .forEach(this::saveMiniature);
 
         } catch (IOException e) {
-            throw new UncheckedIOException("Błąd pobrania listy zdjęć",e);
+            throw new UncheckedIOException("Błąd pobrania listy zdjęć", e);
         }
     }
 
-    private boolean isImage(Path imagePath){
-        final String fileName = imagePath.getFileName().toString().toLowerCase();
-        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
+    private boolean isImage(String fileName) {
+        String lowerFileName = fileName.toLowerCase();
+        return lowerFileName.endsWith(".jpg") ||
+                lowerFileName.endsWith(".jpeg") ||
+                lowerFileName.endsWith(".png") ||
+                lowerFileName.endsWith(".gif");
     }
+
 }
