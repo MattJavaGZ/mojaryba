@@ -28,14 +28,21 @@ public class AdminPanelController {
         this.imageService = imageService;
     }
 
+    @GetMapping("/admin/panel")
+    String adminPanel() {
+        return "redirect:/admin/uzytkownicy";
+    }
+
     @GetMapping("/admin/uzytkownicy")
-    String adminUsers() {
+    String adminUsers(Model model) {
+        model.addAttribute("heading", "uzytkownicy");
         return "admin-panel-users";
     }
 
     @GetMapping("/admin/szukaj-uzytkownika")
     String finsUser(Model model, @RequestParam String userFind) {
         final List<User> users = userService.findUsers(userFind);
+        model.addAttribute("heading", "uzytkownicy");
         model.addAttribute("users", users);
         return "admin-panel-users";
     }
@@ -118,7 +125,8 @@ public class AdminPanelController {
     }
 
     @GetMapping("/admin/zdjecia")
-    String adminPhotosPage() {
+    String adminPhotosPage(Model model) {
+        model.addAttribute("heading", "zdjecia");
         return "admin-panel-photos";
     }
 

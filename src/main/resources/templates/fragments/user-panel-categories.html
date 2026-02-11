@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
 <body>
 
-  <section class="user-panel-categories" th:fragment="categories">
+<section class="user-panel-categories" th:fragment="categories">
     <ul>
-      <li><a href="#" th:href="@{/panel/moje-okazy}">Moje okazy</a></li>
-      <li><a href="#" th:href="@{/panel/skomentowane}">Skomentowane</a></li>
-      <li><a href="#" th:href="@{/panel/ocenione}">Ocenione</a></li>
-      <li><a href="#" th:href="@{/panel/polubione}">Polubione</a></li>
+        <li th:classappend="${heading == 'Moje okazy'} ? 'active'"><a href="#" th:href="@{/panel/moje-okazy}">Moje okazy</a></li>
+        <li th:classappend="${heading == 'Skomentowane okazy'} ? 'active'"><a href="#" th:href="@{/panel/skomentowane}">Skomentowane</a></li>
+        <li th:classappend="${heading == 'Ocenione okazy'} ? 'active'"><a href="#" th:href="@{/panel/ocenione}">Ocenione</a></li>
+        <li th:classappend="${heading == 'Polubione okazy'} ? 'active'"><a href="#" th:href="@{/panel/polubione}">Polubione</a></li>
     </ul>
     <ul>
-      <li ><a href="#" th:href="@{/panel/dziennik-polowow}" >Dziennik połowów</a></li>
-      <li sec:authorize="hasRole('ADMIN')" ><a href="#" th:href="@{/admin/uzytkownicy}">
-        Zarządzaj userami</a></li>
-      <li><a href="#" th:href="@{/panel/edycja-konta}">
-        Edycja konta</a></li>
-      <li sec:authorize="hasRole('ADMIN')" ><a href="#" th:href="@{/admin/zdjecia}">
-        Zdjęcia</a></li>
+        <li th:classappend="${heading == 'dziennik polowow'} ? 'active'"><a href="#" th:href="@{/panel/dziennik-polowow}">Dziennik połowów</a></li>
+        <li  th:classappend="${heading == 'edycja konta'} ? 'active'"><a href="#" th:href="@{/panel/edycja-konta}">
+            Edycja konta</a></li>
     </ul>
-    </section>
+</section>
 </body>
 </html>

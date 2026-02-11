@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
+<body>
+
+<section class="user-panel-categories" th:fragment="categories">
+    <ul>
+        <li th:classappend="${heading == 'uzytkownicy'} ? 'active'" sec:authorize="hasRole('ADMIN')" ><a href="#" th:href="@{/admin/uzytkownicy}">
+            Zarządzaj userami</a></li>
+
+        <li th:classappend="${heading == 'zdjecia'} ? 'active'"  sec:authorize="hasRole('ADMIN')" ><a href="#" th:href="@{/admin/zdjecia}">
+            Zdjęcia</a></li>
+    </ul>
+</section>
+</body>
+</html>

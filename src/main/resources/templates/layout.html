@@ -59,6 +59,11 @@
     <li class="menu-item interactive-item">
         <a href="#" th:href="@{/panel}" class="account-button">Konto</a>
     </li>
+    <li class="menu-item interactive-item" sec:authorize="hasRole('ADMIN')">
+        <a  href="#" th:href="@{/admin/panel}" >
+            <i class="fa-solid fa-lock" style="color: red;"></i>
+        </a>
+    </li>
     <li class="menu-notification interactive-item" sec:authorize="isAuthenticated()">
         <a href="#" th:href="@{/powiadomienia}">
             <i th:class="${@notificationService.getUnreadNotificationsCount() > 0} ? 'fa-solid fa-bell' : 'fa-regular fa-bell'"

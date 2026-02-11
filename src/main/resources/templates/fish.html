@@ -116,15 +116,35 @@
         <p class="fish-description"
            th:text="${!fish.description.isEmpty()} ? ${fish.description} : 'Brak opisu'">Opis okazu.</p>
     </section>
+
     <section class="fish-section">
         <h2 class="fish-section-heading">Galeria zdjęć</h2>
+
         <div class="fish-gallery-container">
-            <a th:each="i: ${#numbers.sequence(0, fish.photos.size()-1)}" href="#"
-               th:href="@{|/photos/${fish.photos.get(i)}|}">
-                <img src="#" th:src="@{|/miniatures/${fish.photos.get(i)}|}" alt="Zdjęcie ryby" class="fish-gallery-photo interactive-item">
+            <a th:each="i: ${#numbers.sequence(0, fish.photos.size()-1)}"
+               href="#"
+               th:data-index="${i}"
+               th:data-full="@{|/photos/${fish.photos.get(i)}|}"
+               onclick="openGallery(event, this)">
+                <img src="#" th:src="@{|/miniatures/${fish.photos.get(i)}|}" alt="Zdjęcie ryby"
+                     class="fish-gallery-photo interactive-item">
             </a>
         </div>
     </section>
+
+    <!-- MODAL -->
+    <div id="galleryModal" class="gallery-modal">
+        <span class="gallery-close" onclick="closeGallery()">×</span>
+
+        <div class="gallery-image-wrapper">
+            <span class="gallery-prev" onclick="prevImage()">❮</span>
+            <img id="galleryImage">
+            <span class="gallery-next" onclick="nextImage()">❯</span>
+        </div>
+
+        <div class="gallery-counter" id="galleryCounter"></div>
+    </div>
+
     <section class="comments-section">
         <h2 class="fish-section-heading">Komentarze</h2>
         <div class="fish-comments-container">

@@ -26,7 +26,7 @@ a {
 .jumbotron,
 .menu,
 .list-heading {
-   font-family: "Comic Neue", serif;
+    font-family: "Comic Neue", serif;
 }
 
 .fish-photo-container {
@@ -140,11 +140,13 @@ a {
     .fish-detail-photo {
         border-radius: 15px;
     }
-    .fish-photo-container{
+
+    .fish-photo-container {
         position: static;
         overflow: visible;
     }
 }
+
 
 .jumbotron {
     background-image: url("../img/jezioro.jpg");
@@ -430,7 +432,7 @@ a {
     color: black;
 }
 
-.types-list  {
+.types-list {
     position: relative;
 }
 
@@ -572,45 +574,109 @@ a {
     margin-bottom: 5px;
 }
 
+/*.user-panel-categories > ul {*/
+/*    list-style: none;*/
+/*    !*margin: 0;*!*/
+/*    !*padding: 0;*!*/
+/*    margin: 5px 0;*/
+/*    display: flex;*/
+/*    justify-content: space-evenly;*/
+/*    flex-wrap: wrap; !* dodane zawikanie *!*/
+/*}*/
+
+/*!* kafelki mają wypełniać całą przestrzeń i być lekko przezroczyste *!*/
+/*.user-panel-categories > ul > li {*/
+/*    flex-grow: 1;*/
+/*    padding: 0.5rem;*/
+/*    font-weight: 500;*/
+/*    border: 1px solid;*/
+/*    color: white;*/
+/*    opacity: 0.8;*/
+/*}*/
+
+/*!* po najechaniu na kafelek usuwamy przezroczystość *!*/
+/*.user-panel-categories > ul > li:hover {*/
+/*    opacity: 1;*/
+/*}*/
+
+/*!* wyśrodkowanie tekstu na kafelkach i zmiana koloru linków *!*/
+/*.user-panel-categories > ul > li > a {*/
+/*    color: inherit;*/
+/*    display: block;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.user-panel-categories > ul > li:nth-child(odd) {*/
+/*    background-color: lightskyblue;*/
+/*}*/
+
+/*.user-panel-categories > ul > li:nth-child(even) {*/
+/*    background-color: cornflowerblue;*/
+/*}*/
+
+.user-panel-categories {
+    margin: 16px 0;
+}
+
 .user-panel-categories > ul {
     list-style: none;
-    /*margin: 0;*/
-    /*padding: 0;*/
-    margin: 5px 0;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap; /* dodane zawikanie */
+    padding: 0;
+    margin: 0 0 5px 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
 }
 
-/* kafelki mają wypełniać całą przestrzeń i być lekko przezroczyste */
+/* Kategoria (pill) */
 .user-panel-categories > ul > li {
-    flex-grow: 1;
-    padding: 0.5rem;
-    font-weight: 500;
-    border: 1px solid;
-    color: white;
-    opacity: 0.8;
-}
-
-/* po najechaniu na kafelek usuwamy przezroczystość */
-.user-panel-categories > ul > li:hover {
-    opacity: 1;
-}
-
-/* wyśrodkowanie tekstu na kafelkach i zmiana koloru linków */
-.user-panel-categories > ul > li > a {
-    color: inherit;
-    display: block;
+    border: 1px solid #d0d8e8;
+    border-radius: 999px;
+    background: #f6f8fc;
     text-align: center;
+    transition: all 0.2s ease;
+    /*margin-bottom: 5px;*/
 }
 
-.user-panel-categories > ul > li:nth-child(odd) {
-    background-color: lightskyblue;
+/* Link */
+.user-panel-categories > ul > li > a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #2a3a5e;
+    font-weight: 500;
+    font-size: 14px;
 }
 
-.user-panel-categories > ul > li:nth-child(even) {
-    background-color: cornflowerblue;
+/* Active */
+.user-panel-categories > ul > li.active {
+    background: cornflowerblue;
+    border-color: cornflowerblue;
 }
+
+.user-panel-categories > ul > li.active > a {
+    color: #fff;
+}
+
+/* Tap feedback */
+.user-panel-categories > ul > li:active {
+    transform: scale(0.97);
+}
+
+@media (min-width: 992px) {
+
+    .user-panel-categories > ul {
+        grid-template-columns: repeat(4, auto);
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .user-panel-categories > ul > li > a {
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+}
+
 
 .account-button {
     color: red;
@@ -672,37 +738,6 @@ a {
     font-size: 1.2rem;
 }
 
-.users-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.users-list > li {
-    display: grid;
-    grid-template-columns: 200px 1fr 80px 80px;
-    align-items: center;
-
-    border: 1px groove #aaa;
-    border-radius: 5px;
-    margin: 6px 5px;
-    padding: 6px 10px;
-}
-
-.users-list > li > p {
-    margin: 0;
-}
-
-.users-list > li > a {
-    text-align: center;
-    text-decoration: none;
-    color: #2a55ff;
-    font-weight: 500;
-}
-
-.users-list > li > a:hover {
-    text-decoration: underline;
-}
 
 .admin-user-item-edit {
     display: flex;
@@ -751,7 +786,193 @@ a {
 /*.fish-detail-photo:hover {*/
 /*    transform: scale(1.8);*/
 /*}*/
-.photos-button-container{
+.photos-button-container {
     text-align: center;
 }
 
+.users-list > li {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 10px;
+}
+
+.users-list > li > p:nth-of-type(1) {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.users-list > li > p:nth-of-type(2) {
+    font-size: 14px;
+    word-break: break-all;
+    color: #444;
+}
+
+.users-list > li > a {
+    display: inline-block;
+    width: 48%;
+    padding: 6px 0;
+    font-size: 14px;
+    font-weight: 500;
+
+    border: 1px solid #ddd; /* 👈 delikatna ramka */
+    border-radius: 4px;
+    background: #fafafa;
+    text-align: center;
+}
+
+.users-list > li > a:nth-of-type(1) {
+    color: #2a55ff;
+}
+
+.users-list > li > a:nth-of-type(2) {
+    color: #b00000;
+
+}
+
+
+@media only screen and (min-width: 992px) {
+
+    .users-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .users-list > li {
+        display: grid;
+        grid-template-columns: 200px 1fr 80px 80px;
+        align-items: center;
+
+        border: 1px groove #aaa;
+        border-radius: 5px;
+        margin: 6px 5px;
+        padding: 6px 10px;
+    }
+
+    .users-list > li > p {
+        margin: 0;
+    }
+
+    .users-list > li > a {
+        width: auto;
+        float: none;
+        display: block;
+        padding: 0;
+        background: none;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        color: #2a55ff;
+        font-weight: 500;
+    }
+
+    .users-list > li > a:hover {
+        text-decoration: underline;
+    }
+}
+
+.gallery-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+}
+
+.gallery-modal.open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#galleryImage {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.gallery-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gallery-prev,
+.gallery-next {
+    position: absolute;
+    font-size: 36px;
+    bottom: 80px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-prev {
+    left: 20px;
+}
+
+.gallery-next {
+    right: 20px;
+}
+
+.gallery-prev.hidden,
+.gallery-next.hidden {
+    opacity: 0; /* ukrywa strzałki */
+    pointer-events: none; /* nieklikalne, gdy ukryte */
+}
+
+/* DESKTOP */
+@media (min-width: 992px) {
+    .gallery-prev,
+    .gallery-next {
+        top: 50%;
+        bottom: auto;
+        font-size: 60px;
+    }
+
+    .gallery-prev {
+        left: 30px;
+    }
+
+    .gallery-next {
+        right: 30px;
+    }
+}
+
+
+.gallery-counter {
+    position: fixed;
+    bottom: env(safe-area-inset-bottom, 20px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    color: #fff;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px 12px;
+    border-radius: 20px;
+
+}
+
+.gallery-image-wrapper {
+    position: relative;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -7,9 +7,9 @@
 </head>
 <body>
 <main class="main-content" layout:fragment="content">
-    <div th:replace="~{fragments/user-panel-categories :: categories}"></div>
+    <div th:replace="~{fragments/admin-panel-categories :: categories}"></div>
 
-    <h2 class="list-heading">Wygeneruj miniatury do obecnych zdjęć</h2>
+    <h2 class="list-heading">Wygeneruj brakujęce miniatury zdjęć</h2>
 
     <div class="photos-button-container">
         <form action="#" th:action="@{/admin/generuj-miniatury}">
