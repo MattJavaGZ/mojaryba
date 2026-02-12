@@ -25,11 +25,12 @@
         </select>
 
         <div id="photos-add-container">
-            <label for="file-input">Zdjęcie główne * (Max 10MB - jpg, png, gif)</label>
+            <label for="file-input">Zdjęcie * (Max 25MB - jpg, png, gif. Max 6 zdjęć)</label>
             <input id="file-input" type="file" th:field="*{photos}" accept="image/jpeg, image/jpg, image/png, image/gif"
                    multiple required>
         </div>
         <button id="add-photo-button" type="button">Dodaj kolejne zdjęcie</button>
+        <p th:errors="*{photos}">Błędy związane ze zdjęciami</p>
 
         <label for="weight">Waga w kg</label>
         <input type="number" step="0.1" id="weight" th:field="*{weight}">

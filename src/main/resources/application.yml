@@ -7,8 +7,8 @@ spring:
     change-log: classpath:db/changelog/master.xml
   servlet:
     multipart:
-      max-file-size: 20MB
-      max-request-size: 80MB
+      max-file-size: 25MB
+      max-request-size: 120MB
   profiles:
     active: dev
 
@@ -18,6 +18,11 @@ spring:
         cachecontrol:
           max-age: 30d
           cache-public: true
+      chain:
+        strategy:
+          content:
+            enabled: true
+            paths: /**
 
 server:
   servlet:

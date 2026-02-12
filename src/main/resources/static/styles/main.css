@@ -663,6 +663,10 @@ a {
     transform: scale(0.97);
 }
 
+.user-panel-categories > ul > li:hover {
+    background-color: powderblue;
+}
+
 @media (min-width: 992px) {
 
     .user-panel-categories > ul {

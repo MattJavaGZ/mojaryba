@@ -20,6 +20,7 @@ public class FishToSaveDto {
     private String bait;// przynęta
     @Size(max = 100, message = "Nazwa łowiska może zawierać maksymalnie 50 znaków")
     private String fishingSpot;
+    @Size(max = 6, message = "Maksymalnie 6 zdjęć")
     private List<MultipartFile> photos;
     private String fishType;
 

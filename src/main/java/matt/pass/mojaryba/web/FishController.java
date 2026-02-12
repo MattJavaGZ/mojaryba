@@ -3,7 +3,6 @@ package matt.pass.mojaryba.web;
 import matt.pass.mojaryba.domain.comment.CommentService;
 import matt.pass.mojaryba.domain.comment.dto.CommentDto;
 import matt.pass.mojaryba.domain.favorite.FavoriteService;
-import matt.pass.mojaryba.domain.fish.FishSearchService;
 import matt.pass.mojaryba.domain.fish.FishService;
 import matt.pass.mojaryba.domain.fish.FishTopService;
 import matt.pass.mojaryba.domain.fish.dto.FishDto;
@@ -73,6 +72,7 @@ public class FishController {
         final List<FishDto> top10Fishes = fishTopService.getTop10RatedFishes();
         model.addAttribute("heading", "Top10");
         model.addAttribute("description", "W tej sekcji znajdziesz najlepiej ocenione okazy");
+        model.addAttribute("activPage", "oceniane");
         model.addAttribute("fishes", top10Fishes);
         return "top10";
     }
@@ -82,6 +82,7 @@ public class FishController {
         final List<FishDto> top10LikedFishes = fishTopService.getTop10LikedFishes();
         model.addAttribute("heading", "Top10");
         model.addAttribute("description", "W tej sekcji znajdziesz najbardziej lubiane okazy");
+        model.addAttribute("activPage", "lubiane");
         model.addAttribute("fishes", top10LikedFishes);
         return "top10";
     }
@@ -91,6 +92,7 @@ public class FishController {
         final List<FishDto> top10BigestFishes = fishTopService.getTop10BigestFishes();
         model.addAttribute("heading", "Top10");
         model.addAttribute("description", "W tej sekcji znajdziesz największe/najcięższe ryby");
+        model.addAttribute("activPage", "najwieksze");
         model.addAttribute("fishes", top10BigestFishes);
         return "top10";
     }
