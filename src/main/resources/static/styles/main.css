@@ -477,7 +477,7 @@ a {
     font-size: 1.2rem;
     padding: 8px;
     margin-top: 20px;
-    color: royalblue;
+    color: #4584c5;
     font-weight: bold;
 }
 
@@ -650,8 +650,8 @@ a {
 
 /* Active */
 .user-panel-categories > ul > li.active {
-    background: cornflowerblue;
-    border-color: cornflowerblue;
+    background: #4584c5;
+    border-color: #4584c5;
 }
 
 .user-panel-categories > ul > li.active > a {
@@ -670,7 +670,7 @@ a {
 @media (min-width: 992px) {
 
     .user-panel-categories > ul {
-        grid-template-columns: repeat(4, auto);
+        grid-template-columns: repeat(6, auto);
         justify-content: center;
         gap: 14px;
     }
@@ -979,4 +979,82 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* ===== Formularz ustawień mailingu ===== */
+.form-mailing {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #f4f8f7; /* jasna woda */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.form-mailing table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Nagłówki */
+.form-mailing th {
+    text-align: left;
+    padding: 0.75rem;
+    background: #4584c5;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+/* Wiersze */
+.form-mailing td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #d6e4e2;
+    color: #2c3e3c;
+}
+
+/* Hover wiersza */
+.form-mailing tr:hover td {
+    background: #e9f3f1;
+}
+
+/* ===== Checkbox ===== */
+.form-mailing input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4584c5;
+    cursor: pointer;
+}
+
+/* ===== Przycisk ===== */
+.form-mailing button {
+    display: block;
+    margin: 1.5rem auto 0 auto;
+    padding: 0.7rem 1.6rem;
+    background: linear-gradient(135deg, #3aaed6, #0d5398);
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Hover / active */
+.form-mailing button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.form-mailing button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fish-owner-section {
+    text-align: center;
+    padding-top: 15px;
 }

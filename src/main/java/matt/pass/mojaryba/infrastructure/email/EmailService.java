@@ -1,5 +1,7 @@
 package matt.pass.mojaryba.infrastructure.email;
 
+import matt.pass.mojaryba.domain.email.EmailSettings;
+import matt.pass.mojaryba.domain.email.EmailSettingsService;
 import matt.pass.mojaryba.domain.fish.Fish;
 import matt.pass.mojaryba.domain.user.User;
 import org.apache.commons.mail.EmailException;
@@ -12,10 +14,12 @@ public class EmailService {
 
     private final EmailSender emailSender;
     private final EmailTemplate emailTemplate;
+    private final EmailSettingsService emailSettingsService;
 
-    public EmailService(EmailSender emailSender, EmailTemplate emailTemplate) {
+    public EmailService(EmailSender emailSender, EmailTemplate emailTemplate, EmailSettingsService emailSettingsService) {
         this.emailSender = emailSender;
         this.emailTemplate = emailTemplate;
+        this.emailSettingsService = emailSettingsService;
     }
 
     public void sendActivEmail(User user) throws EmailException {
@@ -37,18 +41,27 @@ public class EmailService {
     }
 
     public void sendCommentNotificationEmail(User user, Fish fish) throws EmailException {
+        if (!emailSettingsService.verifyMailingStatus(EmailSettings.EmailType.COMMENT)) {
+            return;
+        }
         String title = "Nowy komentarz - Moja-Ryba.pl";
         String text = emailTemplate.generateCommentNotificationEmail(user, fish);
         emailSender.sendEmail(user.getEmail(), title, text);
     }
 
     public void sendRatingNotificationEmail(User user, Fish fish) throws EmailException {
+        if (!emailSettingsService.verifyMailingStatus(EmailSettings.EmailType.RATING)) {
+            return;
+        }
         String title = "Nowa ocena - Moja-Ryba.pl";
         String text = emailTemplate.generateRatingNotificationEmail(user, fish);
         emailSender.sendEmail(user.getEmail(), title, text);
     }
 
     public void sendEmailsAboutNewFishesToAllUsers(List<User> users, long fishId) throws EmailException {
+        if (!emailSettingsService.verifyMailingStatus(EmailSettings.EmailType.NEW_FISH)) {
+            return;
+        }
         String tittle = "Nowy okaz na stronie Moja-Ryba.pl";
 
         for (User user : users) {

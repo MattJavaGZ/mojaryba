@@ -53,14 +53,6 @@
         </div>
         <div class="fish-favorite">
 
-            <a href="#" th:href="@{|/admin/usun/${fish.id}|}" sec:authorize="hasRole('ADMIN')"
-               onclick="return confirm('Czy na pewno chcesz usunąć ?')" class="admin-delete interactive-item">
-                Usuń okaz
-            </a>
-            <a th:if="${edit}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete interactive-item">
-                Edytuj okaz
-            </a>
-
 <!--            <a sec:authorize="!hasRole('ADMIN')" th:if="${fish.author}==${currentUserNick}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete">-->
 <!--                Edytuj swój okaz-->
 <!--            </a>-->
@@ -178,6 +170,17 @@
                 <button class="form-button-comment" type="submit">Dodaj</button>
             </form>
         </div>
+    <section class="fish-owner-section">
+
+        <a href="#" th:href="@{|/admin/usun/${fish.id}|}" sec:authorize="hasRole('ADMIN')"
+           onclick="return confirm('Czy na pewno chcesz usunąć ?')" class="admin-delete interactive-item">
+            Usuń okaz
+        </a>
+        <a th:if="${edit}" href="#" th:href="@{|/okaz/edytuj/${fish.id}|}" class="admin-delete interactive-item">
+            Edytuj okaz
+        </a>
+
+    </section>
     </section>
 </main>
 </body>

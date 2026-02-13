@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Zarządzanie mailingiem</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+
+    <div th:replace="~{fragments/admin-panel-categories :: categories}"></div>
+
+    <h1 class="list-heading">Ustawienia mailingu</h1>
+
+    <form th:action="@{/admin/mailing}" th:object="${settings}" method="post" class="form-mailing">
+        <table>
+            <tr>
+                <th>Typ mailingu</th>
+                <th>Aktywny</th>
+            </tr>
+            <tr th:each="setting, iterStat : ${settings.emailSettings}">
+                <td th:text="${setting.emailType}"></td>
+                <td>
+                    <input type="checkbox"
+                           th:field="*{emailSettings[__${iterStat.index}__].enabled}" />
+                    <input type="hidden"
+                           th:field="*{emailSettings[__${iterStat.index}__].emailType}" />
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Zapisz</button>
+    </form>
+
+
+</main>
+</body>
+</html>
