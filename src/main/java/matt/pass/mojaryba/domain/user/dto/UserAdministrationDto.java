@@ -2,6 +2,7 @@ package matt.pass.mojaryba.domain.user.dto;
 
 import matt.pass.mojaryba.infrastructure.config.CustomSecurityService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UserAdministrationDto {
@@ -12,14 +13,19 @@ public class UserAdministrationDto {
     private String nick;
     private boolean activ;
     private List<String> roles;
+    private LocalDateTime lastLoginDate;
+    private LocalDateTime lastActivDate;
 
-    public UserAdministrationDto(Long id, String email, String password, String nick, boolean activ, List<String> roles) {
+    public UserAdministrationDto(Long id, String email, String password, String nick, boolean activ, List<String> roles,
+                                 LocalDateTime lastLoginDate, LocalDateTime lastActivDate) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nick = nick;
         this.activ = activ;
         this.roles = roles;
+        this.lastLoginDate = lastLoginDate;
+        this.lastActivDate = lastActivDate;
     }
 
     public Long getId() {
@@ -72,5 +78,21 @@ public class UserAdministrationDto {
 
     public boolean isBlocked() {
         return roles.contains(CustomSecurityService.BLOCKED_ROLE);
+    }
+
+    public LocalDateTime getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(LocalDateTime lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public LocalDateTime getLastActivDate() {
+        return lastActivDate;
+    }
+
+    public void setLastActivDate(LocalDateTime lastActivDate) {
+        this.lastActivDate = lastActivDate;
     }
 }

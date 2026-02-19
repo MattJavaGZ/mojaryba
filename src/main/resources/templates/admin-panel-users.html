@@ -22,15 +22,23 @@
   <div th:if="${users}">
   <h4 class="list-heading" th:text="${users.isEmpty()? 'Brak wyszukanych użytkowników' : 'Wyszukani użytkownicy'}">
     Wyszukani użytkownicy</h4>
-    <ul class="users-list">
-      <li th:each="user : ${users}">
-        <p th:text="${user.nick}">Nick</p>
-        <p th:text="${user.email}">Email</p>
-        <a href="#" th:href="@{|/admin/uzytkownik/${user.id}|}">Edytuj</a>
-        <a href="#" th:href="@{|/admin/usun-uzytkownika/${user.id}|}"
-           onclick="return confirm('Czy na pewno chcesz usunąć ?')">Usuń</a>
-      </li>
-    </ul>
+      <ul class="users-list">
+          <li th:each="user : ${users}">
+              <div class="user-info">
+                  <p th:text="|Nick: ${user.nick}|">Nick</p>
+                  <p th:text="|Email: ${user.email}|">Email</p>
+                  <p th:text="|Last log: ${user.lastLoginDate == null ? 'brak' : #temporals.format(user.lastLoginDate, 'dd-MM-yyyy HH:mm')}|"
+                     class="user-dates">Ostatnie logowanie</p>
+                  <p th:text="|Last activ: ${user.lastActivDate == null ? 'brak' : #temporals.format(user.lastActivDate, 'dd-MM-yyyy HH:mm')}|"
+                     class="user-dates">Ostatnia aktywność</p>
+              </div>
+              <div class="buttons">
+                  <a th:href="@{|/admin/uzytkownik/${user.id}|}" class="edit">Edytuj</a>
+                  <a th:href="@{|/admin/usun-uzytkownika/${user.id}|}" class="delete"
+                     onclick="return confirm('Czy na pewno chcesz usunąć ?')">Usuń</a>
+              </div>
+          </li>
+      </ul>
   </div>
 
 

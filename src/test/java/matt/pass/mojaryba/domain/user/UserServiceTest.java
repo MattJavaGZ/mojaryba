@@ -1,5 +1,6 @@
 package matt.pass.mojaryba.domain.user;
 
+import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,9 +85,9 @@ class UserServiceTest {
         when(userRepositoryMock.findAll()).thenReturn(List.of(user));
         //when
         //then
-        final List<User> users = userService.findUsers("mat");
+        final List<UserAdministrationDto> users = userService.findUsers("mat");
         assertThat(users.size()).isEqualTo(1);
-        assertThat(users.getFirst()).isEqualTo(user);
+        assertThat(users.getFirst().getEmail()).isEqualTo(user.getEmail());
     }
     @Test
     public void shouldNotFindUser() {
@@ -96,7 +97,7 @@ class UserServiceTest {
         when(userRepositoryMock.findAll()).thenReturn(List.of(user));
         //when
         //then
-        final List<User> users = userService.findUsers("magda");
+        final List<UserAdministrationDto> users = userService.findUsers("magda");
         assertThat(users.size()).isEqualTo(0);
     }
 

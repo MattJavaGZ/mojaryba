@@ -21,7 +21,9 @@ public class UserMapper {
                 user.getPassword(),
                 user.getNick(),
                 user.isActiv(),
-                user.getRoles().stream().map(UserRole::getName).toList()
+                user.getRoles().stream().map(UserRole::getName).toList(),
+                user.getLastLoginDate(),
+                user.getLastActivDate()
         );
     }
 }

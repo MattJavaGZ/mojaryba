@@ -794,87 +794,130 @@ a {
     text-align: center;
 }
 
+.users-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .users-list > li {
+    display: grid;
     grid-template-columns: 1fr;
     gap: 6px;
     padding: 10px;
+    border: 1px groove #aaa;
+    border-radius: 5px;
+    margin: 6px 5px;
 }
 
-.users-list > li > p:nth-of-type(1) {
+
+.users-list > li .user-info p:nth-of-type(1) {
     font-weight: 600;
     font-size: 16px;
 }
 
-.users-list > li > p:nth-of-type(2) {
+
+.users-list > li .user-info p:nth-of-type(2) {
     font-size: 14px;
     word-break: break-all;
     color: #444;
 }
 
-.users-list > li > a {
-    display: inline-block;
-    width: 48%;
+
+.users-list > li .user-info p:nth-of-type(3),
+.users-list > li .user-info p:nth-of-type(4) {
+    font-size: 14px;
+    color: #555;
+    margin-top: 2px;
+}
+
+.users-list > li .buttons {
+    display: flex;
+    gap: 4%;
+    margin-top: 6px;
+}
+
+.users-list > li .buttons a {
+    flex: 1;
     padding: 6px 0;
     font-size: 14px;
     font-weight: 500;
-
-    border: 1px solid #ddd; /* 👈 delikatna ramka */
+    border: 1px solid #ddd;
     border-radius: 4px;
     background: #fafafa;
     text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
 }
 
-.users-list > li > a:nth-of-type(1) {
+.users-list > li .buttons a.edit {
     color: #2a55ff;
+    border-color: #2a55ff;
 }
 
-.users-list > li > a:nth-of-type(2) {
+.users-list > li .buttons a.delete {
     color: #b00000;
-
+    border-color: #b00000;
 }
-
 
 @media only screen and (min-width: 992px) {
 
-    .users-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
     .users-list > li {
         display: grid;
-        grid-template-columns: 200px 1fr 80px 80px;
+        grid-template-columns: 1fr 120px 120px;
+        grid-template-rows: auto;
+        gap: 10px;
         align-items: center;
-
-        border: 1px groove #aaa;
-        border-radius: 5px;
-        margin: 6px 5px;
-        padding: 6px 10px;
+        padding: 10px 14px;
     }
 
-    .users-list > li > p {
+    /* Dane użytkownika po lewej */
+    .users-list > li .user-info {
+        grid-column: 1 / 2;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .users-list > li .user-info p {
         margin: 0;
     }
 
-    .users-list > li > a {
-        width: auto;
-        float: none;
-        display: block;
-        padding: 0;
-        background: none;
-        border: none;
+    .users-list > li .user-info p:nth-of-type(3),
+    .users-list > li .user-info p:nth-of-type(4) {
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 2px;
+    }
+
+    /* Przyciski po prawej – ta sama linia */
+    .users-list > li .buttons {
+        display: contents; /* 👈 kluczowe */
+    }
+
+    .users-list > li .buttons a {
+        padding: 6px 0;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 4px;
+        background: #fafafa;
         text-align: center;
         text-decoration: none;
-        color: #2a55ff;
-        font-weight: 500;
     }
 
-    .users-list > li > a:hover {
-        text-decoration: underline;
+    .users-list > li .buttons a.edit {
+        color: #2a55ff;
+        border: 1px solid #2a55ff;
+    }
+
+    .users-list > li .buttons a.delete {
+        color: #b00000;
+        border: 1px solid #b00000;
+    }
+
+    .users-list > li .buttons a:hover {
+        background-color: #eef2ff;
     }
 }
-
 .gallery-modal {
     position: fixed;
     inset: 0;

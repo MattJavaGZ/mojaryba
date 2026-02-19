@@ -14,8 +14,8 @@ import java.util.List;
 
 @Controller
 public class FishTypeController {
-    private FishTypeService fishTypeService;
-    private FishService fishService;
+    private final FishTypeService fishTypeService;
+    private final FishService fishService;
 
     public FishTypeController(FishTypeService fishTypeService, FishService fishService) {
         this.fishTypeService = fishTypeService;
@@ -27,7 +27,6 @@ public class FishTypeController {
         final List<FishDto> fishesByType = fishService.findFishesByType(fishTypeName, page);
         int totalPages = fishService.totalPagesFishesByType(fishTypeName, page);
         model.addAttribute("heading", "Gatunek: " + fishTypeName);
-        model.addAttribute("description", "Tutaj znajdziesz wszystkie okazy powyższego gatunku");
         model.addAttribute("fishes", fishesByType);
         model.addAttribute("page", page);
         model.addAttribute("totalPages", totalPages);

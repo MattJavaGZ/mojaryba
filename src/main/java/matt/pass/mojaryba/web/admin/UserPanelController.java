@@ -8,6 +8,7 @@ import matt.pass.mojaryba.domain.type.dto.FishTypeDto;
 import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserAdminService;
 import matt.pass.mojaryba.domain.user.UserService;
+import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,7 @@ public class UserPanelController {
     @GetMapping("/panel")
     String userPanel(Authentication authentication, RedirectAttributes redirectAttributes) {
         final String userEmail = authentication.getName();
-        final User user = userService.findUserByEmail(userEmail).orElseThrow();
-        if (userService.isBlocked(user)){
+        if (userService.isBlocked(userEmail)){
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Twoje konto zostało zablokowane");
         }
@@ -138,7 +138,7 @@ public class UserPanelController {
     @GetMapping("/panel/edycja-konta")
         String userPanelEdit(Model model, Authentication authentication){
         final String userEmail = authentication.getName();
-        final User user = userService.findUserByEmail(userEmail).orElseThrow();
+        final UserAdministrationDto user = userService.findUserAdministrationByEmail(userEmail).orElseThrow();
         model.addAttribute("user", user);
         model.addAttribute("heading", "edycja konta");
         return "user-panel-edit";

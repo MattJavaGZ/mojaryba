@@ -1,6 +1,5 @@
 package matt.pass.mojaryba.web.admin;
 
-import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserAdminService;
 import matt.pass.mojaryba.domain.user.UserService;
 import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
@@ -41,7 +40,7 @@ public class AdminPanelController {
 
     @GetMapping("/admin/szukaj-uzytkownika")
     String finsUser(Model model, @RequestParam String userFind) {
-        final List<User> users = userService.findUsers(userFind);
+        final List<UserAdministrationDto> users = userService.findUsers(userFind);
         model.addAttribute("heading", "uzytkownicy");
         model.addAttribute("users", users);
         return "admin-panel-users";

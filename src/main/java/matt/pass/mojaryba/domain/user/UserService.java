@@ -1,6 +1,7 @@
 package matt.pass.mojaryba.domain.user;
 
 import jakarta.transaction.Transactional;
+import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
 import matt.pass.mojaryba.domain.user.dto.UserCredentialsDto;
 import matt.pass.mojaryba.domain.user.dto.UserRegisterDto;
 import matt.pass.mojaryba.infrastructure.config.CustomSecurityService;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,6 +37,11 @@ public class UserService {
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmailIgnoreCase(email);
+    }
+
+    public Optional<UserAdministrationDto> findUserAdministrationByEmail(String email) {
+        return userRepository.findByEmailIgnoreCase(email)
+                .map(UserMapper::mapToUserAdministration);
     }
 
     public User register(UserRegisterDto userRegisterDto) throws EmailException {
@@ -82,14 +89,16 @@ public class UserService {
         return false;
     }
 
-    public List<User> findUsers(String findUser) {
+    public List<UserAdministrationDto> findUsers(String findUser) {
         return userRepository.findAll().stream()
                 .filter(user -> user.getNick().toLowerCase().contains(findUser.toLowerCase()) ||
-                        user.getEmail().equalsIgnoreCase(findUser))
+                        user.getEmail().toLowerCase().contains(findUser.toLowerCase()))
+                .map(UserMapper::mapToUserAdministration)
                 .toList();
     }
-    public boolean isBlocked(User user) {
+    public boolean isBlocked(String userEmail) {
         final UserRole blockerRole = userRoleRepository.findByName(CustomSecurityService.BLOCKED_ROLE).orElseThrow();
+        final User user = userRepository.findByEmailIgnoreCase(userEmail).orElseThrow();
         return user.getRoles().contains(blockerRole);
     }
 
@@ -97,5 +106,15 @@ public class UserService {
         final List<User> users = userRepository.findAllByActivIsTrue();
         users.remove(user);
         return users;
+    }
+    @Transactional
+    public void updateLastLoginDate(String email){
+        userRepository.findByEmailIgnoreCase(email)
+                .ifPresent(user -> user.setLastLoginDate(LocalDateTime.now()));
+    }
+    @Transactional
+    public void updateLastActivDate(String email){
+        userRepository.findByEmailIgnoreCase(email)
+                .ifPresent(user -> user.setLastActivDate(LocalDateTime.now()));
     }
 }

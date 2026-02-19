@@ -71,7 +71,7 @@ public class FishController {
     String top10Rated(Model model) {
         final List<FishDto> top10Fishes = fishTopService.getTop10RatedFishes();
         model.addAttribute("heading", "Top10");
-        model.addAttribute("description", "W tej sekcji znajdziesz najlepiej ocenione okazy");
+        model.addAttribute("description", "Najlepiej ocenione okazy");
         model.addAttribute("activPage", "oceniane");
         model.addAttribute("fishes", top10Fishes);
         return "top10";
@@ -81,7 +81,7 @@ public class FishController {
     String top10Liked(Model model) {
         final List<FishDto> top10LikedFishes = fishTopService.getTop10LikedFishes();
         model.addAttribute("heading", "Top10");
-        model.addAttribute("description", "W tej sekcji znajdziesz najbardziej lubiane okazy");
+        model.addAttribute("description", "Najbardziej lubiane okazy");
         model.addAttribute("activPage", "lubiane");
         model.addAttribute("fishes", top10LikedFishes);
         return "top10";
@@ -91,7 +91,7 @@ public class FishController {
     String top10Bigest(Model model) {
         final List<FishDto> top10BigestFishes = fishTopService.getTop10BigestFishes();
         model.addAttribute("heading", "Top10");
-        model.addAttribute("description", "W tej sekcji znajdziesz największe/najcięższe ryby");
+        model.addAttribute("description", "Największe/najcięższe ryby");
         model.addAttribute("activPage", "najwieksze");
         model.addAttribute("fishes", top10BigestFishes);
         return "top10";

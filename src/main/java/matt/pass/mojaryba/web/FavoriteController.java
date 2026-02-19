@@ -26,8 +26,7 @@ public class FavoriteController {
     @GetMapping("/ulubione")
     String favorite(Model model, @CookieValue(value = "favorite", defaultValue = "") String favorite) {
         final Set<FishDto> favoritesList = favoriteService.getFavoritesList(favorite);
-        model.addAttribute("heading", "Ulubione");
-        model.addAttribute("description", "W tej sekcji znajdziesz okazy dodane przez Ciebie do ulubionych");
+        model.addAttribute("heading", "Ulubione okazy");
         model.addAttribute("fishes", favoritesList);
         return "fish-listing";
     }
