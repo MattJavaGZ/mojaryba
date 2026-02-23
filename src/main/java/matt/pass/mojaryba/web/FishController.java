@@ -22,11 +22,11 @@ import java.util.Set;
 
 @Controller
 public class FishController {
-     private final FishService fishService;
-     private final FishTopService fishTopService;
-     private final RatingService ratingService;
-     private final CommentService commentService;
-     private final FavoriteService favoriteService;
+    private final FishService fishService;
+    private final FishTopService fishTopService;
+    private final RatingService ratingService;
+    private final CommentService commentService;
+    private final FavoriteService favoriteService;
 
     public FishController(FishService fishService, FishTopService fishTopService, RatingService ratingService,
                           CommentService commentService, FavoriteService favoriteService) {
@@ -53,7 +53,6 @@ public class FishController {
             final Integer currentRating = ratingService.getCurrentRating(userEmail, id);
             model.addAttribute("currentRating", currentRating);
             model.addAttribute("edit", isAdminOrAuthor);
-
         }
 
         List<CommentDto> commentsForFish = commentService.getCommentsForFish(id);

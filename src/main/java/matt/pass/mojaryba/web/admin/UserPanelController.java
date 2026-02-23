@@ -5,10 +5,10 @@ import matt.pass.mojaryba.domain.fish.FishService;
 import matt.pass.mojaryba.domain.fish.dto.FishDto;
 import matt.pass.mojaryba.domain.type.FishTypeService;
 import matt.pass.mojaryba.domain.type.dto.FishTypeDto;
-import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserAdminService;
 import matt.pass.mojaryba.domain.user.UserService;
 import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
+import matt.pass.mojaryba.domain.user.exceptions.NickExistsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +41,7 @@ public class UserPanelController {
     @GetMapping("/panel")
     String userPanel(Authentication authentication, RedirectAttributes redirectAttributes) {
         final String userEmail = authentication.getName();
-        if (userService.isBlocked(userEmail)){
+        if (userService.isBlocked(userEmail)) {
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Twoje konto zostało zablokowane");
         }
@@ -121,9 +121,10 @@ public class UserPanelController {
         model.addAttribute("fishes", fishes);
         sendAllTypes(model);
     }
+
     @GetMapping("/panel/dziennik-polowow/data")
     String fishingLogDate(Model model, @RequestParam String start, @RequestParam String end,
-                          Authentication authentication){
+                          Authentication authentication) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         final LocalDate startDate = LocalDate.parse(start, formatter);
         final LocalDate endDate = LocalDate.parse(end, formatter);
@@ -135,37 +136,39 @@ public class UserPanelController {
         model.addAttribute("heading", "dziennik polowow");
         return "user-panel-fishing-log";
     }
+
     @GetMapping("/panel/edycja-konta")
-        String userPanelEdit(Model model, Authentication authentication){
+    String userPanelEdit(Model model, Authentication authentication) {
         final String userEmail = authentication.getName();
         final UserAdministrationDto user = userService.findUserAdministrationByEmail(userEmail).orElseThrow();
         model.addAttribute("user", user);
         model.addAttribute("heading", "edycja konta");
         return "user-panel-edit";
     }
-    @PostMapping("/panel/edycja-konta/edytuj-nick")
-        String userPanelEditNick(@RequestParam String nick, Authentication authentication,
-                                 RedirectAttributes redirectAttributes){
-        final String userEmail = authentication.getName();
-        final User user = userService.findUserByEmail(userEmail).orElseThrow();
 
-        if (userService.chechExistByNick(nick)) {
-            redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
-                    "Podany nick jest już zajęty");
-        }else {
-            userAdminService.adminEditUserNick(nick, user.getId());
+    @PostMapping("/panel/edycja-konta/edytuj-nick")
+    String userPanelEditNick(@RequestParam String nick, Authentication authentication,
+                             RedirectAttributes redirectAttributes) {
+        final String userEmail = authentication.getName();
+        try {
+            userAdminService.adminEditUserNickByEmail(nick, userEmail);
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Nick został zmieniony");
+        } catch (NickExistsException e) {
+            redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
+                    e.getMessage());
         }
-       return "redirect:/panel/edycja-konta";
+
+        return "redirect:/panel/edycja-konta";
     }
+
     @PostMapping("/panel/edycja-konta/edytuj-haslo")
-        String userPanelEditPassword(@RequestParam String password1, @RequestParam String password2,
-                                     Authentication authentication, RedirectAttributes redirectAttributes){
+    String userPanelEditPassword(@RequestParam String password1, @RequestParam String password2,
+                                 Authentication authentication, RedirectAttributes redirectAttributes) {
         final String userEmail = authentication.getName();
-        final User user = userService.findUserByEmail(userEmail).orElseThrow();
+
         if (password1.equals(password2)) {
-            userAdminService.adminEditUserPass(password1, user.getId());
+            userAdminService.adminEditUserPassByEmail(password1, userEmail);
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Hasło zostało zmienione");
         } else {

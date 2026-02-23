@@ -43,7 +43,7 @@ class UserAdminServiceTest {
         when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
         //when
         //then
-        Assertions.assertThatThrownBy(() -> userAdminService.adminEditUserNick("new nick", 1L))
+        Assertions.assertThatThrownBy(() -> userAdminService.adminEditUserNickById("new nick", 1L))
                 .isInstanceOf(NoSuchElementException.class);
     }
 

@@ -2,6 +2,7 @@ package matt.pass.mojaryba.domain.user;
 
 import jakarta.transaction.Transactional;
 import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
+import matt.pass.mojaryba.domain.user.exceptions.NickExistsException;
 import matt.pass.mojaryba.infrastructure.config.CustomSecurityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,14 +40,38 @@ public class UserAdminService {
     }
 
     @Transactional
-    public void adminEditUserNick(String nick, long userId) {
+    public void adminEditUserNickById(String nick, long userId) {
+        final boolean nickExists = userRepository.existsByNickIgnoreCase(nick);
+        if (nickExists) {
+            throw new NickExistsException(nick);
+        }
         final User user = userRepository.findById(userId).orElseThrow();
         user.setNick(nick);
     }
 
     @Transactional
-    public void adminEditUserPass(String password, long userId) {
+    public void adminEditUserNickByEmail(String nick, String userEmail) {
+        final boolean nickExists = userRepository.existsByNickIgnoreCase(nick);
+        if (nickExists) {
+            throw new NickExistsException(nick);
+        }
+        final User user = userRepository.findByEmailIgnoreCase(userEmail).orElseThrow();
+        user.setNick(nick);
+    }
+
+    @Transactional
+    public void adminEditUserPassById(String password, long userId) {
         final User user = userRepository.findById(userId).orElseThrow();
+        setNewPass(user, password);
+    }
+
+    @Transactional
+    public void adminEditUserPassByEmail(String password, String userEmail) {
+        final User user = userRepository.findByEmailIgnoreCase(userEmail).orElseThrow();
+        setNewPass(user, password);
+    }
+
+    private void setNewPass(User user, String password) {
         final String encodePassword = passwordEncoder.encode(password);
         user.setPassword(encodePassword);
     }

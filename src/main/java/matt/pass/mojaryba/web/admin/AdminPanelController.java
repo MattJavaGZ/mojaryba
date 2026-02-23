@@ -3,6 +3,7 @@ package matt.pass.mojaryba.web.admin;
 import matt.pass.mojaryba.domain.user.UserAdminService;
 import matt.pass.mojaryba.domain.user.UserService;
 import matt.pass.mojaryba.domain.user.dto.UserAdministrationDto;
+import matt.pass.mojaryba.domain.user.exceptions.NickExistsException;
 import matt.pass.mojaryba.infrastructure.files.ImageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,11 +63,11 @@ public class AdminPanelController {
 
     @PostMapping("/admin/edytuj-nick/{id}")
     String editUserNick(@PathVariable long id, @RequestParam String nick, RedirectAttributes redirectAttributes) {
-        if (userService.chechExistByNick(nick)) {
-            sendNotyfication(redirectAttributes, "Podany nick jest już zajęty");
-        } else {
-            userAdminService.adminEditUserNick(nick, id);
+        try {
+            userAdminService.adminEditUserNickById(nick, id);
             sendNotyfication(redirectAttributes, "Nick został zmieniony");
+        } catch (NickExistsException e) {
+            sendNotyfication(redirectAttributes, e.getMessage());
         }
         return "redirect:/admin/uzytkownik/" + id;
     }
@@ -85,7 +86,7 @@ public class AdminPanelController {
 
     @PostMapping("/admin/edytuj-haslo/{id}")
     String editUserPass(@PathVariable long id, @RequestParam String password, RedirectAttributes redirectAttributes) {
-        userAdminService.adminEditUserPass(password, id);
+        userAdminService.adminEditUserPassById(password, id);
         sendNotyfication(redirectAttributes, "Hasło zostało zmienione");
         return "redirect:/admin/uzytkownik/" + id;
     }
