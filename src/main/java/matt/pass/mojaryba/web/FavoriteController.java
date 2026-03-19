@@ -3,6 +3,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import matt.pass.mojaryba.domain.favorite.FavoriteService;
 import matt.pass.mojaryba.domain.fish.dto.FishDto;
+import matt.pass.mojaryba.web.util.RedirectUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -32,17 +33,17 @@ public class FavoriteController {
     }
     @GetMapping("/ulubione/add/{id}")
     String addToFavorite(@PathVariable long id, @CookieValue(value = "favorite", defaultValue = "") String favorite,
-                         HttpServletResponse response, @RequestHeader String referer) {
+                         HttpServletResponse response, @RequestHeader (required = false) String referer) {
         final String updatedFavoroteCookie = favoriteService.addToFavorite(favorite, id);
         createAndSendFavoriteCookie(response, updatedFavoroteCookie);
-        return "redirect:" + referer;
+        return "redirect:" + RedirectUtils.safeReturn(referer);
     }
     @GetMapping("/ulubione/delete/{id}")
     String deleteFromFavorite(@PathVariable long id,@CookieValue(value = "favorite", defaultValue = "") String favorite,
-                              HttpServletResponse response,  @RequestHeader String referer) {
+                              HttpServletResponse response,  @RequestHeader(required = false) String referer) {
         final String updatedFavoroteCookie = favoriteService.deleteWithFavorite(favorite, id);
         createAndSendFavoriteCookie(response, updatedFavoroteCookie);
-        return "redirect:" + referer;
+        return "redirect:" + RedirectUtils.safeReturn(referer);
     }
     private void createAndSendFavoriteCookie(HttpServletResponse response, String favorite) {
         final Cookie cookie = new Cookie("favorite", URLEncoder.encode(favorite, StandardCharsets.UTF_8));

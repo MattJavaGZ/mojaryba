@@ -1,6 +1,7 @@
 package matt.pass.mojaryba.web;
 
 import matt.pass.mojaryba.domain.like.LikeService;
+import matt.pass.mojaryba.web.util.RedirectUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @Controller
 public class LikeController {
-    private LikeService likeService;
+    private final LikeService likeService;
 
     public LikeController(LikeService likeService) {
         this.likeService = likeService;
     }
 
     @GetMapping("/like/{id}")
-    String updateLikeFish(@PathVariable long id, Authentication authentication, @RequestHeader String referer){
+    String updateLikeFish(@PathVariable long id, Authentication authentication, @RequestHeader (required = false) String referer){
         final String userEmail = authentication.getName();
         likeService.addOrUpdateLike(userEmail, id);
-        return "redirect:" + referer;
+        return "redirect:" + RedirectUtils.safeReturn(referer);
     }
 }
