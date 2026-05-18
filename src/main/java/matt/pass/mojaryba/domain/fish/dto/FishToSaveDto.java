@@ -12,8 +12,8 @@ public class FishToSaveDto {
     private String title;
     @Size(max = 1000, message = "Opis może zawierać maksymalnie {max} znaków")
     private String description;
-    private double weight;
-    private int length;
+    private Double weight;
+    private Integer length;
     @Size(max = 50, message = "Nazwa metody połowu może zawierać maksymalnie 50 znaków")
     private String fishingMethod;  //metoda połowu
     @Size(max = 50, message = "Nazwa przynęty może zawierać maksymalnie 50 znaków")
@@ -27,8 +27,8 @@ public class FishToSaveDto {
     public FishToSaveDto() {
     }
 
-    public FishToSaveDto(String title, String description, double weight, int length, String fishingMethod, String bait,
-                         String fishingSpot, List<MultipartFile> photos, String fishType) {
+    public FishToSaveDto(String title, String description, Double weight, Integer length, String fishingMethod,
+                         String bait, String fishingSpot, List<MultipartFile> photos, String fishType) {
         this.title = title;
         this.description = description;
         this.weight = weight;
@@ -56,19 +56,19 @@ public class FishToSaveDto {
         this.description = description;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 

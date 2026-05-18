@@ -147,6 +147,7 @@ public class FishService {
 
     public long createFishFromForm(FishToSaveDto fishToSaveDto, User user) {
         final FishType fishType = fishTypeRepository.findByName(fishToSaveDto.getFishType()).orElseThrow();
+
         Fish fish = FishMapper.mapFishToSaveToFish(fishToSaveDto, fishType, user);
 
         final Fish savedFish = fishRepository.save(fish);

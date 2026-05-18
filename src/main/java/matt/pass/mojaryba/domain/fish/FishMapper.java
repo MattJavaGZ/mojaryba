@@ -61,8 +61,10 @@ public class FishMapper {
         fish.setTitle(fishToSaveDto.getTitle());
         fish.setDateAdded(LocalDateTime.now());
         fish.setDescription(fishToSaveDto.getDescription());
-        fish.setWeight(fishToSaveDto.getWeight());
-        fish.setLength(fishToSaveDto.getLength());
+
+        fish.setWeight(fishToSaveDto.getWeight() == null ? 0 : fishToSaveDto.getWeight());
+        fish.setLength(fishToSaveDto.getLength() == null ? 0 : fishToSaveDto.getLength());
+
         fish.setFishingMethod(fishToSaveDto.getFishingMethod());
         fish.setBait(fishToSaveDto.getBait());
         fish.setFishingSpot(fishToSaveDto.getFishingSpot());

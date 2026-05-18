@@ -135,7 +135,7 @@ class FishServiceTest {
         final FishToSaveDto fishToSave = new FishToSaveDto();
         fishToSave.setTitle("karp");
         fishToSave.setDescription("karp");
-        fishToSave.setWeight(1);
+        fishToSave.setWeight(1.0);
         fishToSave.setLength(1);
         fishToSave.setFishingSpot("karp");
         fishToSave.setBait("karp");
