@@ -32,6 +32,12 @@ a {
 .fish-photo-container {
     position: relative;
     overflow: hidden;
+
+}
+.fish-photo-container img {
+    max-height: 250px;
+    height: auto;
+    display: block;
 }
 
 .fish-list-item-title {
@@ -281,6 +287,7 @@ a {
 
 .fish-details-info {
     margin-left: 16px;
+    margin-top: 16px ;
 }
 
 
@@ -307,6 +314,7 @@ a {
     background-color: hsl(220, 70%, 95%);
     box-shadow: 8px 8px 16px #bebebe,
     -8px -8px 16px #ffffff;
+    max-height: 200px;
 }
 
 
