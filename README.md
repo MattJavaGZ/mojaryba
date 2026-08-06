@@ -1,5 +1,18 @@
-# env
-## prod: www.moja-ryba.pl
+# Moja-ryba
+
+## 📋 O Projekcie
+
+**Moja-ryba** Aplikacja służąca do dodawania swoich złowionych ryb. Możliwość komentowania, oceniania, lajkowania itp. 
+Każdy użytkownik ma dostęp do swojego dziennika połowów.
+
+### prod: www.moja-ryba.pl
+
+- **Język**: Java 21
+- **Framework**: Spring Boot 3.4.5
+- **Baza danych**: MySQL (produkcja) / H2 (development)
+- **Szablony**: Thymeleaf
+- **ORM**: JPA/Hibernate
+- **Migracje**: Liquibase
 
 # 🔐 Konfiguracja email
 
