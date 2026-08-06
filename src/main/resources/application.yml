@@ -33,8 +33,8 @@ server:
 
 app:
   email:
-    login: matekjava@onet.pl
-    password: pass
+    login: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
 
   storage:
     photo-location: uploads/photos/
