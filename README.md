@@ -3,6 +3,8 @@
 
 # 🔐 Konfiguracja email
 
+Konfiguracja dla smtp.poczta.onet.pl
+
 ## application.yml
 
 ```yaml
