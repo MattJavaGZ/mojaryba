@@ -23,7 +23,7 @@ public class EmailSender {
         email.setSmtpPort(465);
         email.setAuthenticator(new DefaultAuthenticator(emailLogin, emailPassword));
         email.setSSLOnConnect(true);
-        email.setFrom("matekjava@onet.pl");
+        email.setFrom(emailLogin);
         email.setSubject(title);
         email.setMsg(text);
         email.addTo(userEmail);

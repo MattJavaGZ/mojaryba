@@ -1,0 +1,4 @@
+app:
+  email:
+    login: test@example.com
+    password: test-password
