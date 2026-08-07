@@ -33,8 +33,8 @@ server:
 
 app:
   email:
-    login: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASSWORD}
+    login: matekjava@onet.pl
+    password: nowetrudnehaslo123@
 
   storage:
     photo-location: uploads/photos/
