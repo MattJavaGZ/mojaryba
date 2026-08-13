@@ -19,8 +19,12 @@
 
     <include file="../testdata/0005_fish_type.xml" relativeToChangelogFile="true"/>
     <include file="../testdata/0006_email_setting.xml" relativeToChangelogFile="true"/>
+    <include file="../testdata/0007_user_role.sql" relativeToChangelogFile="true"/>
+    <include file="../testdata/0004_test_users.sql" relativeToChangelogFile="true"/>
+    <include file="../testdata/0009_test_users_roles.sql" relativeToChangelogFile="true"/>
 
-    <include file="../testdata/0004_users_and_roles.sql" relativeToChangelogFile="true" context="dev"/>
+
+
     <include file="../testdata/0002_fish.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/0003_fish_photos.sql" relativeToChangelogFile="true" context="dev"/>
 
