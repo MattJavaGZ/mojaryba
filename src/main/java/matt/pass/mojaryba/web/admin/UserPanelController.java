@@ -87,7 +87,7 @@ public class UserPanelController {
     @GetMapping("/panel/dziennik-polowow")
     String userPanelFishingLog(Model model) {
         sendAllTypes(model);
-        model.addAttribute("heading", "dziennik polowow");
+        model.addAttribute("heading", "Dziennik polowow");
         return "user-panel-fishing-log";
     }
 
@@ -102,7 +102,6 @@ public class UserPanelController {
         final List<FishDto> fishesByTypeAndUser = fishService.findFishesByTypeAndUser(type, userEmail);
         String summary = String.format("Gatunek %s - złowiłeś %d szt.", type, fishesByTypeAndUser.size());
         sendAtributes(model, fishesByTypeAndUser, summary);
-        model.addAttribute("heading", "dziennik polowow");
         return "user-panel-fishing-log";
     }
 
@@ -112,7 +111,6 @@ public class UserPanelController {
         final List<FishDto> fishes = fishSearchService.searchInUserFishes(userEmail, find);
         String summary = String.format("Wyszukane okazy - %d szt.", fishes.size());
         sendAtributes(model, fishes, summary);
-        model.addAttribute("heading", "dziennik polowow");
         return "user-panel-fishing-log";
     }
 
@@ -133,7 +131,6 @@ public class UserPanelController {
         String summary = String.format("W okresie od %s do %s złowiłeś %d szt.",
                 start, end, fishesByUserAndDate.size());
         sendAtributes(model, fishesByUserAndDate, summary);
-        model.addAttribute("heading", "dziennik polowow");
         return "user-panel-fishing-log";
     }
 

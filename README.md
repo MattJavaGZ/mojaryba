@@ -1,13 +1,13 @@
 # Moja-ryba
 
-## 📋 O Projekcie
+## 📋 O projekcie
 
 **Moja-ryba**   Aplikacja dla wędkarzy służąca do dodawania zdjęć, opisów złowionych ryb. 
                 Możliwość komentowania, oceniania, lajkowania, dodawania do ulubionych.
                 Każdy użytkownik ma dostęp do swojego dziennika połowów.
                 Panel administratora umożliwia zarządzanie użytkownikami oraz powiadomieniami mailowymi do użytkowników.
 
-**### PRODUKCJA: www.moja-ryba.pl**
+**### Produkcja: www.moja-ryba.pl**
 
 - **Język**: Java 21
 - **Framework**: Spring Boot 3.4.5
@@ -31,10 +31,13 @@ W MySQL należy utworzyć bazę danych o nazwie: mojaryba
 **3. Utworzenie sieci Docker**
 
 Tworzymy dedykowaną sieć Docker, która umożliwi komunikację pomiędzy kontenerem aplikacji oraz kontenerem MySQL:
+```bash
 docker network create mojaryba-network
+```
 Następnie należy dodać kontener MySQL do utworzonej sieci:
+```bash
 docker network connect mojaryba-network <mysql-container-name>
-
+```
 Dzięki temu aplikacja może komunikować się z bazą danych poprzez sieć Docker.
 
 **4. Uruchomienie aplikacji**
@@ -43,11 +46,11 @@ Aplikację uruchamiamy jako kontener Docker, przekazując wymagane zmienne środ
 
 Aplikacja wymaga również dwóch wolumenów:
 
-mojaryba-volume:/uploads/photos – przechowywanie zdjęć,
+mojaryba-volume:/uploads/photos – przechowywanie zdjęć
 mojaryba-volume-miniature:/uploads/miniatures – przechowywanie miniaturek zdjęć.
 
 **Przykładowa komenda:**
-
+```bash
 docker run -d \
 --name=mojaryba \
 -v mojaryba-volume:/uploads/photos \
@@ -60,15 +63,13 @@ docker run -d \
 --network mojaryba-network \
 --restart unless-stopped \
 mojaryba
-
+```
 **Zmienne środowiskowe**
 
-Przed uruchomieniem kontenera należy skonfigurować następujące zmienne środowiskowe:
-
-EMAIL_USERNAME	Adres e-mail wykorzystywany przez aplikację do wysyłania wiadomości
-EMAIL_PASSWORD	Hasło do konta e-mail
-DATABASE_USERNAME	Użytkownik bazy danych
-DATABASE_PASSWORD	Hasło użytkownika bazy danych
+EMAIL_USERNAME	        Adres e-mail wykorzystywany przez aplikację do wysyłania wiadomości
+EMAIL_PASSWORD	        Hasło do konta e-mail
+DATABASE_USERNAME	    Użytkownik bazy danych
+DATABASE_PASSWORD	    Hasło użytkownika bazy danych
 SPRING_PROFILES_ACTIVE	Aktywny profil Spring Boot, w tym przypadku prod
 
 
