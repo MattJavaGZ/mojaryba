@@ -94,3 +94,23 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 ```
+
+## 🧪 Konta demonstracyjne
+
+Aplikacja udostępnia testowe konta demonstracyjne, dzięki którym można zapoznać się z jej funkcjonalnościami.
+
+### 👤 Użytkownik
+
+**Login:** `user@example.com`  
+**Hasło:** `DemoUser123!`
+
+Konto umożliwia korzystanie z funkcjonalności dostępnych dla standardowego użytkownika.
+
+### 🔐 Administrator
+
+**Login:** `admin@example.com`  
+**Hasło:** `DemoAdmin123!`
+
+Konto posiada pełne uprawnienia administratora i umożliwia przetestowanie panelu administracyjnego.
+
+> ⚠️ Powyższe konta służą wyłącznie do demonstracji aplikacji. Nie należy wykorzystywać ich do przechowywania prywatnych danych ani do wykonywania rzeczywistych operacji.
