@@ -45,10 +45,10 @@ Dzięki temu aplikacja może komunikować się z bazą danych poprzez sieć Dock
 Aplikację uruchamiamy jako kontener Docker, przekazując wymagane zmienne środowiskowe.
 
 Aplikacja wymaga również dwóch wolumenów:
-
+```bash
 mojaryba-volume:/uploads/photos – przechowywanie zdjęć
 mojaryba-volume-miniature:/uploads/miniatures – przechowywanie miniaturek zdjęć.
-
+```
 **Przykładowa komenda:**
 ```bash
 docker run -d \
@@ -65,13 +65,13 @@ docker run -d \
 mojaryba
 ```
 **Zmienne środowiskowe**
-
+```bash
 EMAIL_USERNAME	        Adres e-mail wykorzystywany przez aplikację do wysyłania wiadomości
 EMAIL_PASSWORD	        Hasło do konta e-mail
 DATABASE_USERNAME	    Użytkownik bazy danych
 DATABASE_PASSWORD	    Hasło użytkownika bazy danych
 SPRING_PROFILES_ACTIVE	Aktywny profil Spring Boot, w tym przypadku prod
-
+```
 
 # 🔐 Konfiguracja email
 Konfiguracja dla smtp.poczta.onet.pl
