@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Strona błędu 400</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+
+    <div class="error-container">
+        <h1 class="error-header">Strona nie istnieje <i class="fa-solid fa-face-frown error-icon"></i></h1>
+        <h3>Ktoś zjadł tą stronę. Możliwe, że to ten koleżka poniżej :)</h3>
+        <img src="../static/img/rekin.jpg" th:src="@{/img/rekin.jpg}" alt="Rekin" class="error-photo">
+    </div>
+
+</main>
+</body>
+</html>
