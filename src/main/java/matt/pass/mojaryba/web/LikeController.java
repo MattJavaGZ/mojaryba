@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @Controller
 public class LikeController {
     private final LikeService likeService;
+    private final RedirectUtils redirectUtils;
 
-    public LikeController(LikeService likeService) {
+    public LikeController(LikeService likeService, RedirectUtils redirectUtils) {
         this.likeService = likeService;
+        this.redirectUtils = redirectUtils;
     }
 
     @GetMapping("/like/{id}")
     String updateLikeFish(@PathVariable long id, Authentication authentication, @RequestHeader (required = false) String referer){
         final String userEmail = authentication.getName();
         likeService.addOrUpdateLike(userEmail, id);
-        return "redirect:" + RedirectUtils.safeReturn(referer);
+        return "redirect:" + redirectUtils.safeReturn(referer);
     }
 }

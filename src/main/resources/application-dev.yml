@@ -12,6 +12,7 @@ spring:
       static-locations: classpath:/static/,file:uploads/
 
 app:
+  url: http://localhost:8080
   email:
     url: http://localhost:8080
     login: test@example.com

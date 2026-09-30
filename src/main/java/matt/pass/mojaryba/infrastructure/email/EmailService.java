@@ -5,6 +5,7 @@ import matt.pass.mojaryba.domain.email.EmailSettingsService;
 import matt.pass.mojaryba.domain.fish.Fish;
 import matt.pass.mojaryba.domain.user.User;
 import org.apache.commons.mail.EmailException;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class EmailService {
         String text = emailTemplate.generateContactEmail(name, email, message);
         emailSender.sendEmail("matekjava@onet.pl", title, text);
     }
-
+    @Async
     public void sendCommentNotificationEmail(User user, Fish fish) throws EmailException {
         if (!emailSettingsService.verifyMailingStatus(EmailSettings.EmailType.COMMENT)) {
             return;
@@ -48,7 +49,7 @@ public class EmailService {
         String text = emailTemplate.generateCommentNotificationEmail(user, fish);
         emailSender.sendEmail(user.getEmail(), title, text);
     }
-
+    @Async
     public void sendRatingNotificationEmail(User user, Fish fish) throws EmailException {
         if (!emailSettingsService.verifyMailingStatus(EmailSettings.EmailType.RATING)) {
             return;
@@ -57,7 +58,7 @@ public class EmailService {
         String text = emailTemplate.generateRatingNotificationEmail(user, fish);
         emailSender.sendEmail(user.getEmail(), title, text);
     }
-
+    @Async
     public void sendEmailsAboutNewFishesToAllUsers(List<User> users, long fishId) throws EmailException {
         if (!emailSettingsService.verifyMailingStatus(EmailSettings.EmailType.NEW_FISH)) {
             return;

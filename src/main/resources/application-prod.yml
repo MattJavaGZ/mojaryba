@@ -13,5 +13,6 @@ spring:
       static-locations: classpath:/static/,file:uploads/
 
 app:
+  url: https://moja-ryba.pl
   email:
     url: https://moja-ryba.pl

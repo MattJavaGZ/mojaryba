@@ -1,5 +1,6 @@
 package matt.pass.mojaryba.web.admin;
 
+import groovy.util.logging.Log4j2;
 import jakarta.validation.Valid;
 import matt.pass.mojaryba.domain.user.User;
 import matt.pass.mojaryba.domain.user.UserAdminService;
@@ -7,6 +8,8 @@ import matt.pass.mojaryba.domain.user.UserService;
 import matt.pass.mojaryba.domain.user.dto.UserRegisterDto;
 import matt.pass.mojaryba.infrastructure.email.EmailService;
 import org.apache.commons.mail.EmailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@Log4j2
 public class RegisterController {
+    private static final Logger log = LoggerFactory.getLogger(RegisterController.class);
     private final UserService userService;
     private final UserAdminService userAdminService;
     private final EmailService emailService;
@@ -40,13 +45,13 @@ public class RegisterController {
             try {
                 final User savedUser = userService.register(user);
                 emailService.sendActivEmail(savedUser);
-                model.addAttribute("heading", "Rejestracja przebiegła pomyślnie");
+                model.addAttribute("heading", "Rejestracja przebiegła pomyślnie. Aktywuj konto");
                 model.addAttribute("description",
-                        "Na Twój adres email została wysłana wiadomość z linkiem aktywacyjnym. Aktywuj konto");
+                        "Na email została wysłana wiadomość z linkiem aktywacyjnym. Brak wiadomości ? Sprawdź spam");
+                log.info("Poprawna rejestracja użytkownika na adres email {}", user.getEmail());
                 return "activation-page";
             } catch (EmailException e) {
-                System.err.println("Problem z wysyłką email");
-                e.printStackTrace();
+                log.error("Błąd podczas wysyłania wiadomości z rejestracją na email {}", user.getEmail());
                 userAdminService.deleteUserByEmail(user.getEmail());
                 model.addAttribute("heading", "Błąd podczas rejestracji");
                 model.addAttribute("description",

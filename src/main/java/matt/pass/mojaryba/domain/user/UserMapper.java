@@ -18,7 +18,6 @@ public class UserMapper {
         return new UserAdministrationDto(
                 user.getId(),
                 user.getEmail(),
-                user.getPassword(),
                 user.getNick(),
                 user.isActiv(),
                 user.getRoles().stream().map(UserRole::getName).toList(),

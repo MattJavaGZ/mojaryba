@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CommentController {
+
     private final CommentService commentService;
     private final NotificationService notificationService;
+    private final RedirectUtils redirectUtils;
 
-    public CommentController(CommentService commentService, NotificationService notificationService) {
+    public CommentController(CommentService commentService, NotificationService notificationService, RedirectUtils redirectUtils) {
         this.commentService = commentService;
         this.notificationService = notificationService;
+        this.redirectUtils = redirectUtils;
     }
 
     @PostMapping("/dodaj-komentarz")
@@ -27,7 +30,7 @@ public class CommentController {
         commentService.addComment(userEmail, id, content);
         notificationService.saveCommentNotificationAndSendEmail(id);
 
-        return "redirect:" + RedirectUtils.safeReturn(referer);
+        return "redirect:" + redirectUtils.safeReturn(referer);
     }
 
 

@@ -101,14 +101,14 @@ Aplikacja udostępnia testowe konta demonstracyjne, dzięki którym można zapoz
 
 ### 👤 Użytkownik
 
-**Login:** `user@example.com`  
+**Login:** `user@example-test.com`  
 **Hasło:** `DemoUser123!`
 
 Konto umożliwia korzystanie z funkcjonalności dostępnych dla standardowego użytkownika.
 
 ### 🔐 Administrator
 
-**Login:** `admin@example.com`  
+**Login:** `admin@example-test.com`  
 **Hasło:** `DemoAdmin123!`
 
 Konto posiada pełne uprawnienia administratora i umożliwia przetestowanie panelu administracyjnego.

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RatingController {
     private final RatingService ratingService;
     private final NotificationService notificationService;
+    private final RedirectUtils redirectUtils;
 
-    public RatingController(RatingService ratingService, NotificationService notificationService) {
+    public RatingController(RatingService ratingService, NotificationService notificationService, RedirectUtils redirectUtils) {
         this.ratingService = ratingService;
         this.notificationService = notificationService;
+        this.redirectUtils = redirectUtils;
     }
 
     @PostMapping("/ocen-rybe")
@@ -27,6 +29,6 @@ public class RatingController {
         ratingService.addOrUpdateRating(userEmail, fishId, rating);
         notificationService.saveRatingNotificationAndSendEmail(fishId);
 
-        return "redirect:" + RedirectUtils.safeReturn(referer);
+        return "redirect:" + redirectUtils.safeReturn(referer);
     }
 }

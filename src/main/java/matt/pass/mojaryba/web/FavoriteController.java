@@ -19,9 +19,11 @@ import java.util.Set;
 public class FavoriteController {
 
     private final FavoriteService favoriteService;
+    private final RedirectUtils redirectUtils;
 
-    public FavoriteController(FavoriteService favoriteService) {
+    public FavoriteController(FavoriteService favoriteService, RedirectUtils redirectUtils) {
         this.favoriteService = favoriteService;
+        this.redirectUtils = redirectUtils;
     }
 
     @GetMapping("/ulubione")
@@ -36,14 +38,14 @@ public class FavoriteController {
                          HttpServletResponse response, @RequestHeader (required = false) String referer) {
         final String updatedFavoroteCookie = favoriteService.addToFavorite(favorite, id);
         createAndSendFavoriteCookie(response, updatedFavoroteCookie);
-        return "redirect:" + RedirectUtils.safeReturn(referer);
+        return "redirect:" + redirectUtils.safeReturn(referer);
     }
     @GetMapping("/ulubione/delete/{id}")
     String deleteFromFavorite(@PathVariable long id,@CookieValue(value = "favorite", defaultValue = "") String favorite,
                               HttpServletResponse response,  @RequestHeader(required = false) String referer) {
         final String updatedFavoroteCookie = favoriteService.deleteWithFavorite(favorite, id);
         createAndSendFavoriteCookie(response, updatedFavoroteCookie);
-        return "redirect:" + RedirectUtils.safeReturn(referer);
+        return "redirect:" + redirectUtils.safeReturn(referer);
     }
     private void createAndSendFavoriteCookie(HttpServletResponse response, String favorite) {
         final Cookie cookie = new Cookie("favorite", URLEncoder.encode(favorite, StandardCharsets.UTF_8));

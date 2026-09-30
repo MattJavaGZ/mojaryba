@@ -9,18 +9,16 @@ public class UserAdministrationDto {
 
     private Long id;
     private String email;
-    private String password;
     private String nick;
     private boolean activ;
     private List<String> roles;
     private LocalDateTime lastLoginDate;
     private LocalDateTime lastActivDate;
 
-    public UserAdministrationDto(Long id, String email, String password, String nick, boolean activ, List<String> roles,
+    public UserAdministrationDto(Long id, String email, String nick, boolean activ, List<String> roles,
                                  LocalDateTime lastLoginDate, LocalDateTime lastActivDate) {
         this.id = id;
         this.email = email;
-        this.password = password;
         this.nick = nick;
         this.activ = activ;
         this.roles = roles;
@@ -42,14 +40,6 @@ public class UserAdministrationDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getNick() {

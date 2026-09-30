@@ -4,19 +4,20 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailSender {
 
-    @Value("${app.email.login}")
-    private String emailLogin;
+    private final String emailLogin;
+    private final String emailPassword;
 
-    @Value("${app.email.password}")
-    private String emailPassword;
+    public EmailSender(@Value("${app.email.login}") String emailLogin,
+                       @Value("${app.email.password}") String emailPassword) {
+        this.emailLogin = emailLogin;
+        this.emailPassword = emailPassword;
+    }
 
-    @Async
     public void sendEmail(String userEmail, String title, String text) throws EmailException {
         SimpleEmail email = new SimpleEmail();
         email.setHostName("smtp.poczta.onet.pl");
