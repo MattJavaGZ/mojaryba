@@ -51,13 +51,13 @@ public class UserService {
         final String encodePassword = passwordEncoder.encode(userRegisterDto.getPassword());
         userToSave.setPassword(encodePassword);
         userToSave.setActiv(false);
-        userToSave.setActivKey(generateActivKey());
+        userToSave.setActivKey(generateKey());
         final UserRole defaultRole = userRoleRepository.findByName(CustomSecurityService.USER_ROLE).orElseThrow();
         userToSave.getRoles().add(defaultRole);
         return userRepository.save(userToSave);
     }
 
-    private String generateActivKey() {
+    private String generateKey() {
         return UUID.randomUUID().toString();
     }
 
@@ -78,12 +78,24 @@ public class UserService {
         return userRepository.existsByNickIgnoreCase(nick);
     }
 
+
+    public void generateNewRemindPassKey(User user) {
+        user.setRemindPassKey(generateKey());
+        user.setRemindPassKeyExpiration(LocalDateTime.now().plusHours(1));
+
+        userRepository.save(user);
+    }
+
+
     @Transactional
-    public boolean setNewPass(long id, String activKey, String newPassword) {
+    public boolean setNewPass(long id, String remindPassKey, String newPassword) {
+
         final User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (user.getActivKey().equals(activKey)) {
+        if (user.getRemindPassKey().equals(remindPassKey) && LocalDateTime.now().isBefore(user.getRemindPassKeyExpiration())) {
             final String encodePassword = passwordEncoder.encode(newPassword);
             user.setPassword(encodePassword);
+            user.setRemindPassKey(null);
+            user.setRemindPassKeyExpiration(null);
             return true;
         }
         return false;
@@ -96,24 +108,27 @@ public class UserService {
                 .map(UserMapper::mapToUserAdministration)
                 .toList();
     }
+
     public boolean isBlocked(String userEmail) {
         final UserRole blockerRole = userRoleRepository.findByName(CustomSecurityService.BLOCKED_ROLE).orElseThrow();
         final User user = userRepository.findByEmailIgnoreCase(userEmail).orElseThrow();
         return user.getRoles().contains(blockerRole);
     }
 
-    public List<User> findAllActiveUsersWithOutAuthor(User user){
+    public List<User> findAllActiveUsersWithOutAuthor(User user) {
         final List<User> users = userRepository.findAllByActivIsTrue();
         users.remove(user);
         return users;
     }
+
     @Transactional
-    public void updateLastLoginDate(String email){
+    public void updateLastLoginDate(String email) {
         userRepository.findByEmailIgnoreCase(email)
                 .ifPresent(user -> user.setLastLoginDate(LocalDateTime.now()));
     }
+
     @Transactional
-    public void updateLastActivDate(String email){
+    public void updateLastActivDate(String email) {
         userRepository.findByEmailIgnoreCase(email)
                 .ifPresent(user -> user.setLastActivDate(LocalDateTime.now()));
     }

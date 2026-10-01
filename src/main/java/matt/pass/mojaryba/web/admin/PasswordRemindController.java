@@ -40,6 +40,7 @@ public class PasswordRemindController {
         userService.findUserByEmail(email).ifPresentOrElse(
                 user -> {
                     try {
+                        userService.generateNewRemindPassKey(user);
                         emailService.sendRemindPassEmail(user);
                         redirectAttributes.addFlashAttribute(
                                 FishManagementController.NOTIFICATION_ATTRIBUTE, message);
@@ -57,20 +58,21 @@ public class PasswordRemindController {
     }
 
     @GetMapping("/ustaw-nowe-haslo/{id}")
-    String setNewPassForm(Model model,@PathVariable long id, @RequestParam String activKey){
+    String setNewPassForm(Model model,@PathVariable long id, @RequestParam String remindPassKey){
         model.addAttribute("id", id);
-        model.addAttribute("activKey", activKey);
+        model.addAttribute("remindPassKey", remindPassKey);
         return "set-pass-form";
     }
     @PostMapping("/ustaw-nowe-haslo/{id}")
-    String setNewPass(@PathVariable long id, @RequestParam String activKey, @RequestParam String password,
+    String setNewPass(@PathVariable long id, @RequestParam String remindPassKey, @RequestParam String password,
                       RedirectAttributes redirectAttributes){
-        if (userService.setNewPass(id, activKey, password)) {
+
+        if (userService.setNewPass(id, remindPassKey, password)) {
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Hasło zostało pomyślnie zmienione");
         } else {
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
-                    "Błąd poczas zmiany hasła. Użyj linku z maila nie zmieniając jego zawartości");
+                    "Błąd podczas zmiany hasła. Link wygasł albo użyłeś błędnego linku. Spróbuj ponownie");
         }
         return "redirect:/login";
     }

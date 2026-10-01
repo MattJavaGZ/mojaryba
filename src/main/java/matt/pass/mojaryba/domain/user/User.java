@@ -29,6 +29,10 @@ public class User {
     private LocalDateTime lastLoginDate;
     @Column(name = "last_activ_date")
     private LocalDateTime lastActivDate;
+    @Column(name = "remind_pass_key")
+    private String remindPassKey;
+    @Column(name = "remind_pass_key_expiration")
+    private LocalDateTime remindPassKeyExpiration;
 
     public Long getId() {
         return id;
@@ -100,5 +104,21 @@ public class User {
 
     public void setLastActivDate(LocalDateTime lastActivDate) {
         this.lastActivDate = lastActivDate;
+    }
+
+    public String getRemindPassKey() {
+        return remindPassKey;
+    }
+
+    public void setRemindPassKey(String remindPassKey) {
+        this.remindPassKey = remindPassKey;
+    }
+
+    public LocalDateTime getRemindPassKeyExpiration() {
+        return remindPassKeyExpiration;
+    }
+
+    public void setRemindPassKeyExpiration(LocalDateTime remindPassKeyExpiration) {
+        this.remindPassKeyExpiration = remindPassKeyExpiration;
     }
 }

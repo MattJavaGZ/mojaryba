@@ -43,6 +43,7 @@ public class EmailTemplate {
                         Poniżej znajdziesz link służący do ustawienia nowego hasła:
                         %s
                         
+                        Link jest ważny przez godzinę od momentu wygenerowania.
                         Proszę o zignorowanie wiadomości jeżeli to nie Ty korzystałeś z przypomnienia hasła.
                         
                         Pozdrawiamy,
@@ -51,7 +52,7 @@ public class EmailTemplate {
     }
 
     private String generateRemindPassUrl(User user) {
-        return String.format("%s/ustaw-nowe-haslo/%d?activKey=%s", url, user.getId(), user.getActivKey());
+        return String.format("%s/ustaw-nowe-haslo/%d?remindPassKey=%s", url, user.getId(), user.getRemindPassKey());
     }
 
     String generateContactEmail(String name, String email, String message) {

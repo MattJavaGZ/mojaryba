@@ -16,6 +16,7 @@
     <include file="0009_create_table_email_setting.xml" relativeToChangelogFile="true"/>
     <include file="0010_add_column_last_login_to_uers.xml" relativeToChangelogFile="true"/>
     <include file="0011_add_column_last_activ_to_users.xml" relativeToChangelogFile="true"/>
+    <include file="0012_add_columns_for_remind_pass_to_users.xml" relativeToChangelogFile="true"/>
 
     <include file="../testdata/0005_fish_type.xml" relativeToChangelogFile="true"/>
     <include file="../testdata/0006_email_setting.xml" relativeToChangelogFile="true"/>
