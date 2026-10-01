@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,18 +62,32 @@ class UserServiceTest {
         when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user));
         when(passwordEncoderMock.encode("newPass")).thenReturn("newPassHash");
         //when
-        final boolean passIsSet = userService.setNewPass(1L, "123qwerty", "newPass");
+        userService.generateNewRemindPassKey(user);
+        final boolean passIsSet = userService.setNewPass(1L, user.getRemindPassKey(), "newPass");
         //then
         assertThat(passIsSet).isTrue();
         assertThat(user.getPassword()).isEqualTo("newPassHash");
     }
 
     @Test
-    public void shouldNotSetNewPassword() {
+    public void shouldNotSetNewPasswordWrongKey() {
         //given
         when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user));
         //when
-        final boolean passIsSet = userService.setNewPass(1L, "wrongActivKey", "newPass");
+        userService.generateNewRemindPassKey(user);
+        final boolean passIsSet = userService.setNewPass(1L, "wrongRemindPassKey", "newPass");
+        //then
+        assertThat(passIsSet).isFalse();
+        assertThat(user.getPassword()).isEqualTo(null);
+    }
+    @Test
+    public void shouldNotSetNewPasswordWrongDateExpiration() {
+        //given
+        when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user));
+        //when
+        userService.generateNewRemindPassKey(user);
+        user.setRemindPassKeyExpiration(LocalDateTime.now().minusHours(2));
+        final boolean passIsSet = userService.setNewPass(1L, user.getRemindPassKey(), "newPass");
         //then
         assertThat(passIsSet).isFalse();
         assertThat(user.getPassword()).isEqualTo(null);
