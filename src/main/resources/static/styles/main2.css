@@ -628,7 +628,6 @@ button {
     flex: 0 1 180px;
     min-width: 0;
     overflow: visible;
-    border-radius: 12px;
     background: var(--surface);
     transition: transform 180ms ease;
 }
@@ -646,7 +645,6 @@ button {
     max-height: 180px;
     min-height: 110px;
     margin: 0;
-    border-radius: 12px;
     background: var(--surface);
     object-fit: contain;
 }
