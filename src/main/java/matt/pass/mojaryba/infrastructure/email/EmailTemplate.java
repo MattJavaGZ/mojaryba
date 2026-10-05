@@ -52,7 +52,7 @@ public class EmailTemplate {
     }
 
     private String generateRemindPassUrl(User user) {
-        return String.format("%s/ustaw-nowe-haslo/%d?remindPassKey=%s", url, user.getId(), user.getRemindPassKey());
+        return String.format("%s/ustaw-nowe-haslo?remindPassKey=%s", url, user.getRemindPassKey());
     }
 
     String generateContactEmail(String name, String email, String message) {

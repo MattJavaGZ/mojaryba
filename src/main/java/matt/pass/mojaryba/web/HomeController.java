@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    private FishService fishService;
+    private final FishService fishService;
 
     public HomeController(FishService fishService) {
         this.fishService = fishService;
@@ -22,7 +22,7 @@ public class HomeController {
         int totalPages = fishService.totalPagesAllFishes(page);
         List<FishDto> allFishes = fishService.findAllFishes(page);
         model.addAttribute("heading", "Najnowsze okazy");
-        model.addAttribute("description", "W tej sekcji znajdziesz najnowsze okazy naszych użytkowników");
+        model.addAttribute("description", "Tutaj znajdziesz najnowsze okazy naszych użytkowników");
         model.addAttribute("fishes", allFishes);
         model.addAttribute("page", page);
         model.addAttribute("totalPages", totalPages);

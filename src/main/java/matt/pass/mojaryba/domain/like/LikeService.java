@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class LikeService {
 
-    private LikeRepository likeRepository;
-    private UserRepository userRepository;
-    private FishRepository fishRepository;
+    private final LikeRepository likeRepository;
+    private final UserRepository userRepository;
+    private final FishRepository fishRepository;
 
     public LikeService(LikeRepository likeRepository, UserRepository userRepository, FishRepository fishRepository) {
         this.likeRepository = likeRepository;

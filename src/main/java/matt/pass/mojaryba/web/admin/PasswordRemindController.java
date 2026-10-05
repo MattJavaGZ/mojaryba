@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,7 +31,7 @@ public class PasswordRemindController {
     }
 
     @PostMapping("/przypomnienie-hasla")
-        String remindPass(@RequestParam String email, RedirectAttributes redirectAttributes){
+    String remindPass(@RequestParam String email, RedirectAttributes redirectAttributes) {
 
         String message = "Jeżeli adres email %s jest poprawny, otrzymałeś link służący do ustawienia nowego hasła. Sprawdź spam"
                 .formatted(email);
@@ -51,23 +50,23 @@ public class PasswordRemindController {
                                 "Błąd podczas wysyłania wiadomości email. Spróuj ponownie");
                     }
                 },
-                () ->  redirectAttributes.addFlashAttribute(
+                () -> redirectAttributes.addFlashAttribute(
                         FishManagementController.NOTIFICATION_ATTRIBUTE, message)
         );
         return "redirect:/przypomnienie-hasla";
     }
 
-    @GetMapping("/ustaw-nowe-haslo/{id}")
-    String setNewPassForm(Model model,@PathVariable long id, @RequestParam String remindPassKey){
-        model.addAttribute("id", id);
+    @GetMapping("/ustaw-nowe-haslo")
+    String setNewPassForm(Model model, @RequestParam String remindPassKey) {
         model.addAttribute("remindPassKey", remindPassKey);
         return "set-pass-form";
     }
-    @PostMapping("/ustaw-nowe-haslo/{id}")
-    String setNewPass(@PathVariable long id, @RequestParam String remindPassKey, @RequestParam String password,
-                      RedirectAttributes redirectAttributes){
 
-        if (userService.setNewPass(id, remindPassKey, password)) {
+    @PostMapping("/ustaw-nowe-haslo")
+    String setNewPass(@RequestParam String remindPassKey, @RequestParam String password,
+                      RedirectAttributes redirectAttributes) {
+
+        if (userService.setNewPass(remindPassKey, password)) {
             redirectAttributes.addFlashAttribute(FishManagementController.NOTIFICATION_ATTRIBUTE,
                     "Hasło zostało pomyślnie zmienione");
         } else {

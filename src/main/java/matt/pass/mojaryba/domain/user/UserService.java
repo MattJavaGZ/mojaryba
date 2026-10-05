@@ -88,17 +88,31 @@ public class UserService {
 
 
     @Transactional
-    public boolean setNewPass(long id, String remindPassKey, String newPassword) {
+    public boolean setNewPass(String remindPassKey, String newPassword) {
 
-        final User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (user.getRemindPassKey().equals(remindPassKey) && LocalDateTime.now().isBefore(user.getRemindPassKeyExpiration())) {
-            final String encodePassword = passwordEncoder.encode(newPassword);
-            user.setPassword(encodePassword);
-            user.setRemindPassKey(null);
-            user.setRemindPassKeyExpiration(null);
-            return true;
+        Optional<User> userOptional = userRepository.findByRemindPassKey(remindPassKey);
+
+        if (userOptional.isEmpty()) {
+            return false;
         }
-        return false;
+
+        User user = userOptional.get();
+
+        if (!isRemindPassKeyValid(user, remindPassKey)) {
+            return false;
+        }
+
+        final String encodePassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodePassword);
+        user.setRemindPassKey(null);
+        user.setRemindPassKeyExpiration(null);
+        return true;
+    }
+
+    private boolean isRemindPassKeyValid(User user, String remindPassKey) {
+        return user.getRemindPassKeyExpiration() != null
+                && LocalDateTime.now().isBefore(user.getRemindPassKeyExpiration())
+                && user.getRemindPassKey().equals(remindPassKey);
     }
 
     public List<UserAdministrationDto> findUsers(String findUser) {

@@ -59,11 +59,11 @@ class UserServiceTest {
     @Test
     public void shouldSetNewPassword() {
         //given
-        when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user));
+        when(userRepositoryMock.findByRemindPassKey(ArgumentMatchers.anyString())).thenReturn(Optional.of(user));
         when(passwordEncoderMock.encode("newPass")).thenReturn("newPassHash");
         //when
         userService.generateNewRemindPassKey(user);
-        final boolean passIsSet = userService.setNewPass(1L, user.getRemindPassKey(), "newPass");
+        final boolean passIsSet = userService.setNewPass(user.getRemindPassKey(), "newPass");
         //then
         assertThat(passIsSet).isTrue();
         assertThat(user.getPassword()).isEqualTo("newPassHash");
@@ -72,10 +72,10 @@ class UserServiceTest {
     @Test
     public void shouldNotSetNewPasswordWrongKey() {
         //given
-        when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user));
+        when(userRepositoryMock.findByRemindPassKey(ArgumentMatchers.anyString())).thenReturn(Optional.of(user));
         //when
         userService.generateNewRemindPassKey(user);
-        final boolean passIsSet = userService.setNewPass(1L, "wrongRemindPassKey", "newPass");
+        final boolean passIsSet = userService.setNewPass("wrongRemindPassKey", "newPass");
         //then
         assertThat(passIsSet).isFalse();
         assertThat(user.getPassword()).isEqualTo(null);
@@ -83,11 +83,11 @@ class UserServiceTest {
     @Test
     public void shouldNotSetNewPasswordWrongDateExpiration() {
         //given
-        when(userRepositoryMock.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(user));
+        when(userRepositoryMock.findByRemindPassKey(ArgumentMatchers.anyString())).thenReturn(Optional.of(user));
         //when
         userService.generateNewRemindPassKey(user);
         user.setRemindPassKeyExpiration(LocalDateTime.now().minusHours(2));
-        final boolean passIsSet = userService.setNewPass(1L, user.getRemindPassKey(), "newPass");
+        final boolean passIsSet = userService.setNewPass( user.getRemindPassKey(), "newPass");
         //then
         assertThat(passIsSet).isFalse();
         assertThat(user.getPassword()).isEqualTo(null);

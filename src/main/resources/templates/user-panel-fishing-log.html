@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Dziennik połowów</title>
@@ -10,7 +9,7 @@
 <main class="main-content" layout:fragment="content">
     <div th:replace="~{fragments/user-panel-categories :: categories}"></div>
     <h2 class="list-heading">Wyszukaj swoje złowione okazy</h2>
-    <div class="fishing-log-container">
+    <div class="fishing-log-container" th:unless="${fishes != null}">
         <div class="find-section">
             <h3>Szukaj po dacie</h3>
             <form action="#" th:action="@{/panel/dziennik-polowow/data}" class="form-user-log">
@@ -44,6 +43,7 @@
 
     <div th:if="${fishes}" class="fishing-log-summary">
         <h3 th:text="${summary}">Ilość złowionych ryb</h3>
+        <a class="fishing-log-new-search" th:href="@{/panel/dziennik-polowow}">Nowe wyszukiwanie</a>
         <div th:replace="~{fragments/fish-list :: list}"></div>
     </div>
 

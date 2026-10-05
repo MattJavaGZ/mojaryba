@@ -11,4 +11,5 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
     boolean existsByEmailIgnoreCase(String email);
     boolean existsByNickIgnoreCase(String nick);
     List<User> findAllByActivIsTrue();
+    Optional<User> findByRemindPassKey(String remindPassKey);
 }

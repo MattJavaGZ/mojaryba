@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (prevBtn) prevBtn.addEventListener("click", prevImage);
     if (nextBtn) nextBtn.addEventListener("click", nextImage);
 
-    // ----------------- KLAVIATURA -----------------
+    // ----------------- KLAWIATURA -----------------
     document.addEventListener("keydown", (e) => {
         if (!galleryModal.classList.contains("open")) return;
         if (e.key === "ArrowRight") nextImage();

@@ -5,14 +5,21 @@
 <body>
     <div th:fragment="list">
 
-      <h2 class="list-heading" th:text="${heading}">Najnowsze rybki</h2>
-      <p class="list-description" th:if="!${fishes.isEmpty()}" th:text="${description}">W tej sekcji znajdziesz
+      <h2 class="list-heading fish-list-heading" th:text="${heading}">Najnowsze rybki</h2>
+      <p class="list-description fish-list-description" th:if="!${fishes.isEmpty()}" th:text="${description}">W tej sekcji znajdziesz
         najnowsze okazy naszych użytkowników </p>
-      <p class="list-description" th:if="${fishes.isEmpty()}">Brak okazów do wyświetlenia :(</p>
+      <p class="list-description fish-list-description" th:if="${fishes.isEmpty()}">Brak okazów do wyświetlenia :(</p>
       <ul class=fish-list th:remove="all-but-first">
         <li class="fish-list-item" th:each="fish: ${fishes}">
           <div class="poster-container">
           <a href="#" th:href="@{|/okaz/${fish.id}|}">
+
+            <img src="../static/img/mat%20karp.jpg" th:src="@{|/miniatures/${fish.photos.get(0)}|}"
+                 loading="lazy"
+                 alt=""
+                 aria-hidden="true"
+                 class="fish-list-item-backdrop">
+
             <img src="../static/img/mat%20karp.jpg" th:src="@{|/miniatures/${fish.photos.get(0)}|}"
                  loading="lazy"
                  alt="zdjęcie ryby"

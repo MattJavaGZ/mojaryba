@@ -1,6 +1,7 @@
 package matt.pass.mojaryba.domain.user;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
+    @Length(min = 8)
     private String password;
     private String nick;
     @Column(columnDefinition = "TINYINT(1)")

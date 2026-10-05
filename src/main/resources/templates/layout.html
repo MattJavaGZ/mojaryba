@@ -21,7 +21,8 @@
           referrerpolicy="no-referrer"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" th:href="@{/styles/main.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/styles/main2.css}">
     <script defer th:src="@{/scripts/common.js}"></script>
     <script defer th:src="@{/scripts/cookie.js}"></script>
 </head>
@@ -39,7 +40,6 @@
         <a href="#"><i id="toggle-icon" class="fa-solid fa-bars"></i> Menu</a>
     </li>
     <li class="menu-item interactive-item" >
-        <i class="fa-duotone fa-plus fa-beat fa-2xl" style="color: red"></i>
         <a href="#" th:href="@{/dodaj-okaz}" >Dodaj</a>
     </li>
     <li class="menu-item interactive-item">
@@ -52,15 +52,14 @@
         <a href="#" th:href="@{/szukaj-formularz}">Wyszukaj</a>
     </li>
     <li class="menu-item interactive-item">
-        <i class="fa-solid fa-heart" style="color: red"></i>
         <a href="#" th:href="@{/ulubione}" >Ulubione</a>
     </li>
     <li class="menu-item interactive-item">
         <a href="#" th:href="@{/panel}" class="account-button">Konto</a>
     </li>
-    <li class="menu-item interactive-item" sec:authorize="hasRole('ADMIN')">
-        <a  href="#" th:href="@{/admin/panel}" >
-            <i class="fa-solid fa-lock" style="color: red;"></i>
+    <li class="menu-item admin-menu-item interactive-item" sec:authorize="hasRole('ADMIN')">
+        <a href="#" th:href="@{/admin/panel}">
+            <i class="fa-solid fa-lock"></i>
         </a>
     </li>
     <li class="menu-notification interactive-item" sec:authorize="isAuthenticated()">
@@ -96,7 +95,6 @@
     </footer>
 </div>
 
-<!-- Cookie banner -->
 <div id="cookie-banner" class="cookie-banner">
     <div class="cookie-content">
         <div class="cookie-text">

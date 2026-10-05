@@ -22,7 +22,7 @@
 
       <div class="admin-user-item-edit">
         <form action="#" th:action="@{/panel/edycja-konta/edytuj-nick}" method="post">
-          <label th:text="|Nick: ${user.nick} - |" for="nick"></label>
+          <label th:text="|Nick: ${user.nick}  |" for="nick"></label>
           <input type="text" minlength="3" id="nick" name="nick" placeholder="nowy nick" required>
           <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienić nick ?')">Zmień</button>
         </form>
@@ -30,7 +30,7 @@
 
       <div class="admin-user-item-edit">
         <form action="#" th:action="@{/panel/edycja-konta/edytuj-haslo}" method="post">
-          <label th:text="|Hasło: *** - |" ></label>
+          <label th:text="|Hasło: ***  |" ></label>
           <input type="password" minlength="8"  name="password1" placeholder="nowe hasło" required>
           <input type="password" minlength="8" name="password2" placeholder="powtórz hasło" required>
           <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienić hasło ?')">Zmień</button>

@@ -17,27 +17,21 @@
 
         <div class="admin-user-item-edit">
             <form action="#" th:action="@{|/admin/edytuj-nick/${user.id}|}" method="post">
-                <label th:text="|Nick: ${user.nick} - |" for="nick"></label>
-<!--            <p th:text="|Nick: ${user.nick}&nbsp|"> Nick: </p>-->
+                <label th:text="|Nick: ${user.nick}  |" for="nick"></label>
                 <input type="text" minlength="3" id="nick" name="nick" placeholder="nowy nick" required>
-<!--            <a href="#" th:href="@{|/admin/edytuj-nick/${user.id}|}"> - Zmień</a>-->
                 <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienić nick ?')">Zmień</button>
             </form>
         </div>
       <div class="admin-user-item-edit">
           <form action="#" th:action="@{|/admin/edytuj-email/${user.id}|}" method="post">
-              <label th:text="|Email: ${user.email} - |" for="email"></label>
-<!--        <p th:text="|Email: ${user.email}&nbsp|">Email</p>-->
-<!--        <a href="#" th:href="@{|/admin/edytuj-email/${user.id}|}"> - Zmień</a>-->
+              <label th:text="|Email: ${user.email}  |" for="email"></label>
               <input type="email" id="email" name="email" placeholder="nowy login" required>
               <button type="submit" onclick="return confirm('Czy na pewno chcesz zmienic email ?')">Zmień</button>
           </form>
       </div>
         <div class="admin-user-item-edit">
             <form action="#" th:action="@{|/admin/edytuj-haslo/${user.id}|}" method="post">
-<!--          <p>Hasło: ***** &nbsp</p>-->
-<!--          <a href="#" th:href="@{|/admin/edytuj-haslo/${user.id}|}"> - Zmień</a>-->
-                <label th:text="|Hasło: *** - |" for="password"></label>
+                <label th:text="|Hasło: ***  |" for="password"></label>
                 <input type="password" minlength="8" id="password" name="password" placeholder="nowe hasło" required>
                 <button type="submit" onclick="return confirm('Czy na pewno zmienić hasło ?')">Zmień</button>
             </form>
@@ -45,7 +39,7 @@
        <div class="admin-user-item-edit">
                <p th:text="${user.activ} ? 'Konto aktywne&nbsp' : 'Konto nieaktywne&nbsp'"></p>
                <a href="#" th:href="${user.activ} ? @{|/admin/dezaktywuj/${user.id}|} : @{|/admin/aktywuj/${user.id}|}"
-                  th:text="${user.activ} ? ' - Dezaktywuj' : ' - Aktywuj'"> - Zmień</a>
+                  th:text="${user.activ} ? '  Dezaktywuj' : '  Aktywuj'"> - Zmień</a>
        </div>
         <div class="admin-user-item-edit">
           <p th:text="|Role: ${user.getRoles()}|">Role</p>
@@ -53,7 +47,7 @@
         <div class="admin-user-item-edit">
             <p th:text="${user.isBlocked()} ? 'User zablokowany&nbsp' : 'Brak blokady&nbsp'"></p>
             <a  href="#" th:href="${user.isBlocked()} ? @{|/admin/odblokuj/${user.id}|} : @{|/admin/blokuj/${user.id}|}"
-                th:text="${user.isBlocked()} ? ' - Odblokuj' : ' - Zablokuj'"></a>
+                th:text="${user.isBlocked()} ? '  Odblokuj' : '  Zablokuj'"></a>
         </div>
 
     </div>

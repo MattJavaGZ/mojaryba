@@ -4,8 +4,8 @@
       layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
 <body>
 
-<section class="user-panel-categories" th:fragment="categories">
-    <ul>
+<section class="panel-categories" th:fragment="categories">
+    <ul class="admin-panel-category-list">
         <li th:classappend="${heading == 'uzytkownicy'} ? 'active'" ><a href="#" th:href="@{/admin/uzytkownicy}">
             Zarządzaj userami</a></li>
 

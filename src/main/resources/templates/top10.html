@@ -8,8 +8,8 @@
 <body>
     <main class="main-content" layout:fragment="content">
 
-        <section class="user-panel-categories" >
-            <ul>
+        <section class="panel-categories" >
+            <ul class="top10-category-list">
                 <li th:classappend="${activPage == 'najwieksze'} ? 'active'">
                     <a href="#" th:href="@{/top10/najwieksze}">Największe ryby</a></li>
                 <li th:classappend="${activPage == 'oceniane'} ? 'active'">

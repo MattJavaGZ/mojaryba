@@ -28,7 +28,7 @@ import java.util.Optional;
 
 @Service
 public class FishService {
-    private final static int PAGE_SIZE = 15;
+    private final static int PAGE_SIZE = 12;
     private final FishRepository fishRepository;
     private final FishTypeRepository fishTypeRepository;
     private final ImageService imageService;

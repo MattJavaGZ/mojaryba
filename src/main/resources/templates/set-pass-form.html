@@ -9,10 +9,10 @@
     <main class="main-content" layout:fragment="content">
         <h1 class="list-heading">Ustawe nowe hasło</h1>
 
-        <form class="form" th:action="@{|/ustaw-nowe-haslo/${id}|}" method="post">
+        <form class="form" th:action="@{/ustaw-nowe-haslo}" method="post">
             <input type="text" hidden name="remindPassKey" th:value="${remindPassKey}">
             <label for="password" >Podaj nowe hasło (min 8 znaków)</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" minlength="8" id="password" name="password" required>
             <button class="form-button" type="submit" >Zmień hasło</button>
         </form>
     </main>

@@ -4,8 +4,8 @@
       layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/html">
 <body>
 
-<section class="user-panel-categories" th:fragment="categories">
-    <ul>
+<section class="panel-categories" th:fragment="categories">
+    <ul class="user-panel-category-list">
         <li th:classappend="${heading == 'Moje okazy'} ? 'active'"><a href="#" th:href="@{/panel/moje-okazy}">Moje okazy</a></li>
         <li th:classappend="${heading == 'Skomentowane okazy'} ? 'active'"><a href="#" th:href="@{/panel/skomentowane}">Skomentowane</a></li>
         <li th:classappend="${heading == 'Ocenione okazy'} ? 'active'"><a href="#" th:href="@{/panel/ocenione}">Ocenione</a></li>

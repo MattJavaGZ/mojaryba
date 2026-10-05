@@ -13,14 +13,14 @@
     Belka z powiadomieniami
   </p>
 
-  <h2 class="list-heading">Wyszukaj użytkownika po mailu lub nicku</h2>
+  <h2 class="list-heading admin-page-heading">Wyszukaj użytkownika po mailu lub nicku</h2>
   <form class="form-users" action="#" th:action="@{/admin/szukaj-uzytkownika}">
     <input type="text" name="userFind" placeholder="nick / email">
     <button type="submit">Szukaj</button>
   </form>
 
   <div th:if="${users}">
-  <h4 class="list-heading" th:text="${users.isEmpty()? 'Brak wyszukanych użytkowników' : 'Wyszukani użytkownicy'}">
+  <h4 class="list-heading admin-page-heading" th:text="${users.isEmpty()? 'Brak wyszukanych użytkowników' : 'Wyszukani użytkownicy'}">
     Wyszukani użytkownicy</h4>
       <ul class="users-list">
           <li th:each="user : ${users}">

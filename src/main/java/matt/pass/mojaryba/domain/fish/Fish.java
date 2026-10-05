@@ -7,11 +7,12 @@ import matt.pass.mojaryba.domain.photos.FishPhotos;
 import matt.pass.mojaryba.domain.rating.Rating;
 import matt.pass.mojaryba.domain.type.FishType;
 import matt.pass.mojaryba.domain.user.User;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Entity
 public class Fish {
@@ -164,16 +165,21 @@ public class Fish {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+
         Fish fish = (Fish) o;
-        return Double.compare(fish.weight, weight) == 0 && length == fish.length && Objects.equals(id, fish.id) && Objects.equals(title, fish.title) && Objects.equals(dateAdded, fish.dateAdded) && Objects.equals(description, fish.description) && Objects.equals(fishingMethod, fish.fishingMethod) && Objects.equals(bait, fish.bait) && Objects.equals(fishingSpot, fish.fishingSpot) && Objects.equals(photos, fish.photos) && Objects.equals(fishType, fish.fishType) && Objects.equals(ratings, fish.ratings) && Objects.equals(likes, fish.likes) && Objects.equals(user, fish.user);
+
+        return id != null && id.equals(fish.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, dateAdded, description, weight, length, fishingMethod, bait, fishingSpot, photos, fishType, ratings, likes, user);
+        return Hibernate.getClass(this).hashCode();
     }
-
-
 }
