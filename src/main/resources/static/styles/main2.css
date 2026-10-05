@@ -604,25 +604,39 @@ button {
     text-align: left;
 }
 
+.fish-section:has(.fish-description) > .fish-section-heading,
+.fish-section:has(.fish-gallery-container) > .fish-section-heading {
+    text-align: center;
+}
+
 .fish-description {
     color: var(--muted);
-    text-align: left;
+    text-align: center;
     white-space: pre-line;
 }
 
 .fish-gallery-container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-content: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
 .fish-gallery-container > a {
+    position: relative;
     display: block;
+    flex: 0 1 180px;
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 12px;
     background: var(--surface);
+    transition: transform 180ms ease;
+}
+
+.fish-gallery-container > a:hover,
+.fish-gallery-container > a:focus-visible {
+    z-index: 1;
+    transform: scale(1.06);
 }
 
 .fish-gallery-photo {
@@ -630,6 +644,7 @@ button {
     width: 100%;
     height: auto;
     max-height: 180px;
+    min-height: 110px;
     margin: 0;
     border-radius: 12px;
     background: var(--surface);
@@ -642,36 +657,39 @@ button {
 
 .comments-section > .fish-section-heading,
 .form-comment > .fish-section-heading {
-    text-align: left;
+    text-align: center;
 }
 
 .comments-list {
     margin: 0 0 18px;
     padding: 0;
-    text-align: left;
+    text-align: center;
 }
 
 .comment {
     margin: 0;
-    padding: 14px 0;
+    padding: 9px 0;
     border: 0;
     border-bottom: 1px solid var(--line);
     list-style: none;
 }
 
 .comment-nick {
+    margin: 0;
     color: var(--ink);
     font-size: 0.9rem;
 }
 
 .comment-content {
-    padding-top: 5px;
+    margin: 2px 0 0;
+    padding-top: 0;
     color: var(--muted);
-    text-align: left;
+    text-align: center;
 }
 
 .comment-date {
-    padding-top: 5px;
+    margin: 2px 0 0;
+    padding-top: 0;
     color: var(--muted);
     font-size: 0.78rem;
 }
@@ -1420,7 +1438,7 @@ button {
     }
 
     .fish-gallery-container {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        flex-wrap: wrap;
     }
 
     .form-user-log {
@@ -1537,7 +1555,7 @@ button {
     }
 
     .fish-gallery-container {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        flex-wrap: wrap;
     }
 
     .form-user-log {
